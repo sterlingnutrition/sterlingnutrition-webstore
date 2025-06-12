@@ -90,7 +90,6 @@ Rename `.env.local.template` ->  `.env.local`
 - How to setup credit card payment with Stripe payment module: https://youtu.be/dcSOpIzc1Og
 - https://funkyton.com/medusajs-2-0-is-finally-here/#succuessfully-deployed-whats-next
 
-  
 <p align="center">
   <a href="https://funkyton.com/">
     <div style="text-align: center;">
