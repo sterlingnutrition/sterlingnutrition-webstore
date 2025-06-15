@@ -42,30 +42,30 @@ export async function generateStaticParams() {
   return staticParams
 }
 
-// export async function generateMetadata({ params }: Props): Promise<Metadata> {
-//   const { handle } = params
-//   const region = await getRegion(params.countryCode)
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { handle } = params
+  const region = await getRegion(params.countryCode)
 
-//   if (!region) {
-//     notFound()
-//   }
+  if (!region) {
+    notFound()
+  }
 
-//   const product = await getProductByHandle(handle, region.id)
+  const product = await getProductByHandle(handle, region.id)
 
-//   if (!product) {
-//     notFound()
-//   }
+  if (!product) {
+    notFound()
+  }
 
-//   return {
-//     title: `${product.title} | Medusa Store`,
-//     description: `${product.title}`,
-//     openGraph: {
-//       title: `${product.title} | Medusa Store`,
-//       description: `${product.title}`,
-//       images: product.thumbnail ? [product.thumbnail] : [],
-//     },
-//   }
-// }
+  return {
+    title: `${product.title} | Medusa Store`,
+    description: `${product.title}`,
+    openGraph: {
+      title: `${product.title} | Medusa Store`,
+      description: `${product.title}`,
+      images: product.thumbnail ? [product.thumbnail] : [],
+    },
+  }
+}
 
 export default async function ProductPage({ params }: Props) {
   const region = await getRegion(params.countryCode)

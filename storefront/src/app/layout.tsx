@@ -1,6 +1,16 @@
 import { getBaseURL } from "@lib/util/env"
+import LenisProvider from "components/lenis-provider"
+import { Marcellus } from "next/font/google"
 import { Metadata } from "next"
 import "styles/globals.css"
+import { cn } from "@lib/utils"
+import QueryProvider from "components/query-provider"
+
+const marcellus = Marcellus({
+  subsets: ["latin"],
+  variable: "--font-marcellus",
+  weight: "400",
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -8,9 +18,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-mode="light">
+    <html
+      lang="en"
+      data-mode="light"
+      suppressHydrationWarning
+      className={cn("scrollbar-thin", marcellus.variable)}
+    >
       <body>
-        <main className="relative">{props.children}</main>
+        <QueryProvider>
+          <LenisProvider>
+            <main className="relative font-roboto">{props.children}</main>
+          </LenisProvider>
+        </QueryProvider>
       </body>
     </html>
   )

@@ -1,32 +1,42 @@
-import { Github } from "@medusajs/icons"
-import { Button, Heading } from "@medusajs/ui"
+import { Button } from "components/ui/button"
+import TextReveal from "components/ui/text-reveal"
+import Image from "next/image"
 
 const Hero = () => {
   return (
-    <div className="h-[75vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle">
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
-        <span>
-          <Heading
-            level="h1"
-            className="text-3xl leading-10 text-ui-fg-base font-normal"
-          >
-            Well done! You have successfully deployed your Medusa 2.0 store on Railway!
-          </Heading>
-          <Heading
-            level="h2"
-            className="text-3xl leading-10 text-ui-fg-subtle font-normal"
-          >
-            Need help customizing your store?
-          </Heading>
-        </span>
-        <a
-          href="https://funkyton.com/medusajs-2-0-is-finally-here/"
-          target="_blank"
-        >
-          <h1 style={{ textDecoration: "underline" }}>
-            Visit the tutorial
+    <div className="relative w-full min-h-[100svh] border-b bg-[#141c29] text-background border-ui-border-base">
+      <div className="absolute inset-0 z-10 flex flex-col items-center gap-6 px-4 pt-16 text-center font-marcellus small:p-32">
+        <TextReveal>
+          <h1 className="mb-4 text-body">
+            Holistic Wellness • Authentic Products • Trusted in Singapore
           </h1>
-        </a>
+          <h1 className="max-w-5xl mx-auto mb-10 text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl xl:text-7xl">
+            Your Trusted Source for Premium Wellness Supplements
+          </h1>
+          <h1 className="max-w-xl mx-auto mb-6 text-body font-roboto">
+            From Goli Ashwagandha Gummies to 100% Cold-Pressed Black Seed
+            Oil—backed by science, delivered with care.
+          </h1>
+        </TextReveal>
+        <Button className="uppercase border-background" variant="hollow">
+          Experience Excellence
+        </Button>
+      </div>
+      <div className="absolute bottom-0">
+        <Image
+          src="/grass-background.webp"
+          alt="Grass Background"
+          height={1080}
+          width={1920}
+        />
+      </div>
+      <div className="absolute bottom-0 flex justify-center w-full">
+        <Image
+          src="/hero-products.webp"
+          alt="Hero Background"
+          height={720}
+          width={1280}
+        />
       </div>
     </div>
   )

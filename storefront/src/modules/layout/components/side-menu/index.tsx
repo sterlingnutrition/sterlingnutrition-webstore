@@ -8,6 +8,7 @@ import { Fragment } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
+import { Menu } from "lucide-react"
 
 const SideMenuItems = {
   Home: "/",
@@ -23,15 +24,15 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
   return (
     <div className="h-full">
       <div className="flex items-center h-full">
-        <Popover className="h-full flex">
+        <Popover className="flex h-full">
           {({ open, close }) => (
             <>
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-hidden hover:text-ui-fg-base"
+                  className="relative flex items-center h-full transition-all duration-200 ease-out focus:outline-hidden hover:text-ui-fg-base"
                 >
-                  Menu
+                  <Menu />
                 </Popover.Button>
               </div>
 
@@ -55,7 +56,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                         <XMark />
                       </button>
                     </div>
-                    <ul className="flex flex-col gap-6 items-start justify-start">
+                    <ul className="flex flex-col items-start justify-start gap-6">
                       {Object.entries(SideMenuItems).map(([name, href]) => {
                         return (
                           <li key={name}>

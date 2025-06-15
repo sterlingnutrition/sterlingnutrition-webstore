@@ -6,6 +6,7 @@ import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
 import { getProductsById } from "@lib/data/products"
 import { HttpTypes } from "@medusajs/types"
+import Image from "next/image"
 
 export default async function ProductPreview({
   product,
@@ -32,16 +33,22 @@ export default async function ProductPreview({
   return (
     <LocalizedClientLink href={`/products/${product.handle}`} className="group">
       <div data-testid="product-wrapper">
-        <Thumbnail
-          thumbnail={product.thumbnail}
-          images={product.images}
-          size="full"
-          isFeatured={isFeatured}
-        />
-        <div className="flex txt-compact-medium mt-4 justify-between">
-          <Text className="text-ui-fg-subtle" data-testid="product-title">
+        <div className="relative w-full overflow-hidden rounded-3xl aspect-square">
+          <Image
+            src={product.thumbnail || "/placeholder.png"}
+            alt={product.title}
+            fill
+            style={{ objectFit: "cover" }}
+            className="object-cover w-full h-auto transition-opacity duration-200 rounded-lg group-hover:opacity-90"
+          />
+        </div>
+        <div className="flex flex-col items-center mt-4">
+          <p
+            className="mb-2 text-center md:mb-4 text-subtitle-sm"
+            data-testid="product-title"
+          >
             {product.title}
-          </Text>
+          </p>
           <div className="flex items-center gap-x-2">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
