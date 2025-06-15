@@ -51,20 +51,20 @@ export async function generateStaticParams() {
   return staticParams
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const collection = await getCollectionByHandle(params.handle)
+// export async function generateMetadata({ params }: Props): Promise<Metadata> {
+//   const collection = await getCollectionByHandle(params.handle)
 
-  if (!collection) {
-    notFound()
-  }
+//   if (!collection) {
+//     notFound()
+//   }
 
-  const metadata = {
-    title: `${collection.title} | Medusa Store`,
-    description: `${collection.title} collection`,
-  } as Metadata
+//   const metadata = {
+//     title: `${collection.title} | Medusa Store`,
+//     description: `${collection.title} collection`,
+//   } as Metadata
 
-  return metadata
-}
+//   return metadata
+// }
 
 export default async function CollectionPage({ params, searchParams }: Props) {
   const { sortBy, page } = searchParams
