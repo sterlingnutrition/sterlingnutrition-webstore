@@ -14,7 +14,7 @@ export default async function PreviewPrice({ price }: { price: VariantPrice }) {
         </p>
       )}
       <p
-        className={cn(" text-center text-body", {
+        className={cn("text-center text-body-sm", {
           "text-ui-fg-interactive": price.price_type === "sale",
         })}
         data-testid="price"

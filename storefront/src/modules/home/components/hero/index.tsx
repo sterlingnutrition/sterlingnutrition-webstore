@@ -22,7 +22,7 @@ const Hero = () => {
           Experience Excellence
         </Button>
       </div>
-      <div className="absolute bottom-0">
+      <div className="absolute bottom-0 ">
         <Image
           src="/grass-background.webp"
           alt="Grass Background"
@@ -30,7 +30,7 @@ const Hero = () => {
           width={1920}
         />
       </div>
-      <div className="absolute bottom-0 flex justify-center w-full">
+      <div className="absolute bottom-0 flex justify-center w-full lg:-bottom-15">
         <Image
           src="/hero-products.webp"
           alt="Hero Background"
