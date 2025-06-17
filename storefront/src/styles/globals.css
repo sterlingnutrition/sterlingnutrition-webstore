@@ -86,29 +86,29 @@
 }
 
 @theme {
-  --font-marcellus: "Marcellus", serif;
+  --font-playfair: "Playfair Display", serif;
   --font-roboto: "Roboto", sans-serif;
 }
 
 @layer utilities {
   .text-title {
-    @apply text-5xl font-medium tracking-tight md:text-6xl lg:text-7xl xl:text-8xl;
+    @apply text-6xl font-light tracking-tight md:text-7xl lg:text-8xl 2xl:text-9xl;
   }
 
   .text-title-sm {
-    @apply text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl xl:text-6xl;
+    @apply text-5xl font-light tracking-tight md:text-6xl lg:text-7xl xl:text-8xl;
   }
 
   .text-subtitle {
-    @apply text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl xl:text-6xl;
+    @apply text-3xl tracking-tight md:text-4xl lg:text-5xl 2xl:text-6xl;
   }
 
   .text-subtitle-sm {
-    @apply text-xl tracking-tighter md:text-2xl lg:text-3xl xl:text-4xl;
+    @apply text-xl tracking-tighter md:text-2xl lg:text-3xl 2xl:text-4xl;
   }
 
   .text-body {
-    @apply text-base lg:text-lg xl:text-xl;
+    @apply text-base lg:text-lg 2xl:text-xl;
   }
 
   .text-body-sm {

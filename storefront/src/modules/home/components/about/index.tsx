@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div className="flex flex-col items-center justify-center px-4 py-16 mx-auto sm:px-10 lg:py-32">
       <TextReveal>
-        <h1 className="max-w-5xl mb-10 text-center text-title-sm font-marcellus">
+        <h1 className="max-w-4xl mb-10 text-center text-subtitle font-playfair">
           {"High Performance Natural Men's Care"}
           <span className="italic">Trusted By Leaders</span>
         </h1>

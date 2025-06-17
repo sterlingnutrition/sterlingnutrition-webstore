@@ -5,6 +5,8 @@ import Hero from "@modules/home/components/hero"
 import { getCollectionsWithProducts } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import About from "@modules/home/components/about"
+import ShowcaseProducts from "@modules/home/components/showcase-products"
+import Categories from "@modules/home/components/categories"
 
 export const metadata: Metadata = {
   title: "Home - Sterling Nutrition",
@@ -27,10 +29,12 @@ export default async function Home({
   return (
     <>
       <Hero />
+      <Categories />
       <About />
       <ul className="flex flex-col gap-x-6">
         <FeaturedProducts collections={collections} region={region} />
       </ul>
+      <ShowcaseProducts />
     </>
   )
 }

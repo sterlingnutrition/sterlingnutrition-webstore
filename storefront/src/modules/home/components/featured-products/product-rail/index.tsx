@@ -29,7 +29,7 @@ export default function ProductRail({
   return (
     <div className="px-4 py-16 mx-auto sm:px-10 ">
       <TextReveal>
-        <h1 className="mb-10 text-center lg:mb-16 text-title font-marcellus">
+        <h1 className="mb-10 text-center uppercase lg:mb-16 text-title font-playfair">
           {collection.title}
         </h1>
       </TextReveal>

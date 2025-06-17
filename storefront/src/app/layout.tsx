@@ -1,15 +1,15 @@
 import { getBaseURL } from "@lib/util/env"
 import LenisProvider from "components/lenis-provider"
-import { Marcellus } from "next/font/google"
+import { Cormorant_Garamond } from "next/font/google"
 import { Metadata } from "next"
 import "styles/globals.css"
 import { cn } from "@lib/utils"
 import QueryProvider from "components/query-provider"
 
-const marcellus = Marcellus({
+const playfair = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-marcellus",
-  weight: "400",
+  variable: "--font-playfair",
+  weight: ["300", "400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       lang="en"
       data-mode="light"
       suppressHydrationWarning
-      className={cn("scrollbar-thin", marcellus.variable)}
+      className={cn("scrollbar-thin", playfair.variable)}
     >
       <body>
         <QueryProvider>

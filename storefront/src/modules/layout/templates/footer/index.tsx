@@ -51,9 +51,18 @@ export default async function Footer({
   const { product_categories } = await getCategoriesList(0, 6)
 
   return (
-    <footer className="pt-32">
+    <footer className="relative pt-16 lg:pt-32">
+      <div className="absolute bottom-0">
+        <Image
+          src="/footer-bg.webp"
+          alt="Grass Background"
+          height={1080}
+          width={1920}
+          className="opacity-10"
+        />
+      </div>
       <div className="px-4 mx-auto 2xl:container sm:px-10">
-        <div className="flex flex-col justify-between w-full gap-10 pb-16 lg:flex-row lg:items-start lg:text-left">
+        <div className="flex flex-col justify-between w-full gap-10 pb-6 lg:pb-16 lg:flex-row lg:items-start lg:text-left">
           <div className="flex flex-col justify-between w-full gap-6 lg:items-start">
             <div className="flex items-center gap-2 lg:justify-start">
               <LocalizedClientLink
@@ -68,10 +77,10 @@ export default async function Footer({
                 />
               </LocalizedClientLink>
             </div>
-            <p className="max-w-[70%] text-base text-muted-foreground">
+            <p className="max-w-[70%] text-body-sm text-foreground">
               {description}
             </p>
-            <ul className="flex items-center space-x-6 text-muted-foreground">
+            <ul className="flex items-center space-x-6 text-foreground">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="font-medium hover:text-primary">
                   <a href={social.href} aria-label={social.label}>
@@ -84,8 +93,8 @@ export default async function Footer({
           <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
             {product_categories && product_categories?.length > 0 && (
               <div>
-                <h3 className="mb-4 font-bold">Categories</h3>
-                <ul className="space-y-3 text-sm text-muted-foreground">
+                <h3 className="mb-4 font-bold text-body-sm">Categories</h3>
+                <ul className="space-y-3 text-body-sm text-foreground">
                   {product_categories?.slice(0, 6).map((c) => {
                     if (c.parent_category) {
                       return null
@@ -99,7 +108,10 @@ export default async function Footer({
                       })) || null
 
                     return (
-                      <li key={c.id} className="font-medium hover:text-primary">
+                      <li
+                        key={c.id}
+                        className=" text-body-sm hover:text-primary"
+                      >
                         <LocalizedClientLink
                           href={`/categories/${c.handle}`}
                           className={clx("hover:text-ui-fg-base")}
@@ -129,8 +141,8 @@ export default async function Footer({
 
             {collections && collections.length > 0 && (
               <div>
-                <h3 className="mb-4 font-bold">Collections</h3>
-                <ul className="space-y-3 text-sm text-muted-foreground">
+                <h3 className="mb-4 font-bold text-body-sm">Collections</h3>
+                <ul className="space-y-3 text-body-sm text-foreground">
                   {collections?.slice(0, 6).map((c) => (
                     <li key={c.id} className="font-medium hover:text-primary">
                       <LocalizedClientLink href={`/collections/${c.handle}`}>
@@ -143,8 +155,8 @@ export default async function Footer({
             )}
 
             <div>
-              <h3 className="mb-4 font-bold">Company</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <h3 className="mb-4 font-bold text-body-sm">Company</h3>
+              <ul className="space-y-3 text-body-sm text-foreground">
                 <li className="font-medium hover:text-primary">
                   <LocalizedClientLink href="/about">
                     Our Story
@@ -164,12 +176,12 @@ export default async function Footer({
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between gap-4 py-8 mt-8 text-xs font-medium border-t text-muted-foreground md:flex-row md:items-center md:text-left">
+        <div className="flex flex-col justify-between gap-2 py-8 mt-8 border-t md:gap-4 text-body-sm text-foreground md:flex-row md:items-center md:text-left">
           <p className="order-2 lg:order-1">
             © {new Date().getFullYear()} Sterling Nutrition. All rights
             reserved.
           </p>
-          <ul className="flex flex-col order-1 gap-2 md:order-2 md:flex-row">
+          <ul className="flex order-1 gap-2 md:gap-4 md:order-2 ">
             {legalLinks.map((link, idx) => (
               <li key={idx} className="hover:text-primary">
                 <a href={link.href}> {link.name}</a>
