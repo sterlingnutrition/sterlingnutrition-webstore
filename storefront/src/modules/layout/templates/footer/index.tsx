@@ -52,13 +52,13 @@ export default async function Footer({
 
   return (
     <footer className="relative pt-16 lg:pt-32">
-      <div className="absolute bottom-0">
+      <div className="absolute bottom-0 -z-10">
         <Image
           src="/footer-bg.webp"
           alt="Grass Background"
           height={1080}
           width={1920}
-          className="opacity-10"
+          className="opacity-20"
         />
       </div>
       <div className="px-4 mx-auto 2xl:container sm:px-10">

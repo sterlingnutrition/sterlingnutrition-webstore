@@ -15,7 +15,7 @@ const About = () => {
         </p>
       </TextReveal>
       <Button className="uppercase" variant="hollow">
-        Learn More
+        Read Our Story
       </Button>
     </div>
   )

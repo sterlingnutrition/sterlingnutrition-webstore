@@ -92,19 +92,19 @@
 
 @layer utilities {
   .text-title {
-    @apply text-6xl font-light tracking-tight md:text-7xl lg:text-8xl 2xl:text-9xl;
+    @apply text-6xl font-light tracking-tight md:text-7xl lg:text-8xl 2xl:text-9xl text-slate-800;
   }
 
   .text-title-sm {
-    @apply text-5xl font-light tracking-tight md:text-6xl lg:text-7xl xl:text-8xl;
+    @apply text-5xl font-light tracking-tight md:text-6xl lg:text-7xl xl:text-8xl text-slate-800;
   }
 
   .text-subtitle {
-    @apply text-3xl tracking-tight md:text-4xl lg:text-5xl 2xl:text-6xl;
+    @apply text-3xl tracking-tight md:text-4xl lg:text-5xl 2xl:text-6xl text-slate-800;
   }
 
   .text-subtitle-sm {
-    @apply text-xl tracking-tighter md:text-2xl lg:text-3xl 2xl:text-4xl;
+    @apply text-2xl tracking-tighter md:text-3xl lg:text-4xl 2xl:text-5xl text-slate-800;
   }
 
   .text-body {
