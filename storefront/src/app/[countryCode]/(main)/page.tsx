@@ -29,18 +29,18 @@ export default async function Home({
     return null
   }
 
-  const bestSelling = collections.find(
-    (collection) => collection.handle === "best-sellers"
-  )
-
   return (
     <>
       <Hero />
       <Categories />
       <About />
-      {bestSelling && <ProductRail collection={bestSelling} region={region} />}
+      {collections[1] && (
+        <ProductRail collection={collections[1]} region={region} />
+      )}
       <ShowcaseProducts />
-      {bestSelling && <ProductRail collection={bestSelling} region={region} />}
+      {collections[0] && (
+        <ProductRail collection={collections[0]} region={region} />
+      )}
       <Testimonials />
       <CTA />
       <TrustSection />

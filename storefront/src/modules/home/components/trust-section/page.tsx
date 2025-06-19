@@ -1,41 +1,57 @@
+import { Separator } from "components/ui/separator"
 import TextReveal from "components/ui/text-reveal"
 import React from "react"
 
 const TRUST_ITEMS = [
   {
-    title: "Free shipping on orders over $70!*",
-    content: "*Excludes Alaska and Hawaii. Sorry guys, one day soon!!",
-    key: "shipping",
+    title: "COD & Contactless Delivery",
+    content:
+      "Enjoy the convenience of cash on delivery and contactless delivery options. We ensure a safe and secure shopping experience, so you can focus on what matters most.",
+    key: "delivery",
   },
   {
-    title: "Client Support",
+    title: "Secured Online Payment",
     content:
-      "Elevate your routine, hassle-free. No questions asked. Reach us at hello@lumbazzi.com with any concern. We will take care of you.",
-    key: "support",
+      "Shop with confidence! Our website is secured with the latest encryption technology, ensuring your personal and payment information is safe and protected at all times.",
+    key: "payment",
   },
   {
-    title: "Become a Partner",
+    title: "100% Authentic Products",
     content:
-      "Get paid to help others feel and look their best! Join our ambassador program to unlock exclusive benefits with your personal affiliate link. Click 'Partnership' below to learn more.",
-    key: "partner",
+      "We guarantee that all our products are 100% authentic and sourced directly from trusted manufacturers. Your health and safety are our top priorities, so you can shop with peace of mind.",
+    key: "authenticity",
   },
 ]
 
 const TrustSection = () => {
   return (
-    <div className="grid grid-cols-1 px-4 mx-auto md:py-16 md:grid-cols-3 sm:px-10 lg:py-32">
-      {TRUST_ITEMS.map((item) => (
-        <div key={item.key} className="min-h-48 md:min-h-80">
-          <h1 className="p-6 font-light border border-b-0 md:border-b md:p-10 text-subtitle-sm font-playfair">
-            {item.title}
-          </h1>
-          <TextReveal>
-            <p className="flex-1 h-full px-6 border border-t-0 md:border-b-0 md:p-10 text-body-sm">
-              {item.content}
-            </p>
-          </TextReveal>
-        </div>
-      ))}
+    <div className=" md:py-16 lg:py-32">
+      <Separator className="hidden md:block bg-gradient-to-r from-transparent via-muted-foreground to-transparent" />
+      <div className="grid grid-cols-1 px-4 mx-auto md:grid-cols-3 sm:px-10">
+        {TRUST_ITEMS.map((item) => (
+          <div key={item.key} className="flex min-h-48 md:min-h-80">
+            <Separator
+              orientation="vertical"
+              className="bg-gradient-to-t from-transparent via-muted-foreground to-transparent"
+            />
+            <div className="w-full">
+              <h1 className="p-6 font-light md:p-10 2xl:py-16 text-subtitle-sm font-playfair">
+                {item.title}
+              </h1>
+              <Separator className="bg-gradient-to-r from-transparent via-muted-foreground to-transparent" />
+              <TextReveal>
+                <p className="flex-1 h-full p-6 md:p-10 text-body-sm text-muted-foreground">
+                  {item.content}
+                </p>
+              </TextReveal>
+            </div>
+            <Separator
+              orientation="vertical"
+              className="bg-gradient-to-t from-transparent via-muted-foreground to-transparent"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
