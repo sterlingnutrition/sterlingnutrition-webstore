@@ -2,13 +2,13 @@
 
 import { InstantSearch } from "react-instantsearch-hooks-web"
 import { useRouter } from "next/navigation"
-import { MagnifyingGlassMini } from "@medusajs/icons"
 
 import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client"
 import Hit from "@modules/search/components/hit"
 import Hits from "@modules/search/components/hits"
 import SearchBox from "@modules/search/components/search-box"
 import { useEffect, useRef } from "react"
+import { Search } from "lucide-react"
 
 export default function SearchModal() {
   const router = useRouter()
@@ -56,7 +56,7 @@ export default function SearchModal() {
 
   return (
     <div className="relative z-75">
-      <div className="fixed inset-0 bg-opacity-75 backdrop-blur-md opacity-100 h-screen w-screen" />
+      <div className="fixed inset-0 w-screen h-screen bg-opacity-75 opacity-100 backdrop-blur-md" />
       <div className="fixed inset-0 px-5 sm:p-0" ref={searchRef}>
         <div className="flex flex-col justify-start w-full h-fit transform p-5 items-center text-left align-middle transition-all max-h-[75vh] bg-transparent shadow-none">
           <InstantSearch
@@ -64,11 +64,11 @@ export default function SearchModal() {
             searchClient={searchClient}
           >
             <div
-              className="flex absolute flex-col h-fit w-full sm:w-fit"
+              className="absolute flex flex-col w-full px-4 h-fit sm:w-fit"
               data-testid="search-modal-container"
             >
-              <div className="w-full flex items-center gap-x-2 p-4 bg-[rgba(3,7,18,0.5)] text-ui-fg-on-color backdrop-blur-2xl rounded-rounded">
-                <MagnifyingGlassMini />
+              <div className="w-full flex items-center gap-x-2 p-4 border-[rgba(3,7,18,0.5)] bg-white border  backdrop-blur-2xl rounded-full">
+                <Search />
                 <SearchBox />
               </div>
               <div className="flex-1 mt-6">

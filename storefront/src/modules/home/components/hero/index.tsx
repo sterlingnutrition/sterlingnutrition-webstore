@@ -5,7 +5,7 @@ import Image from "next/image"
 const Hero = () => {
   return (
     <div className="relative w-full min-h-[100svh] border-b bg-gradient-to-tr from-slate-950 to-slate-800 text-background border-ui-border-base">
-      <div className="absolute inset-0 z-10 flex flex-col items-center gap-6 px-4 pt-16 text-center font-playfair small:p-32">
+      <div className="absolute inset-0 z-10 flex flex-col items-center gap-6 px-4 pt-16 text-center font-elegant small:p-32">
         <TextReveal>
           <h1 className="mb-4 text-body">
             Holistic Wellness • Authentic Products • Trusted in Singapore
@@ -13,15 +13,12 @@ const Hero = () => {
           <h1 className="max-w-5xl mx-auto mb-10 text-4xl tracking-tight md:text-5xl lg:text-6xl xl:text-7xl">
             Your Trusted Source for Premium Wellness Supplements
           </h1>
-          <h1 className="max-w-xl mx-auto mb-6 text-body font-roboto">
+          <h1 className="max-w-xl mx-auto mb-6 text-body font-base">
             From Goli Ashwagandha Gummies to 100% Cold-Pressed Black Seed
             Oil—backed by science, delivered with care.
           </h1>
         </TextReveal>
-        <Button
-          className="uppercase border-background font-roboto"
-          variant="hollow"
-        >
+        <Button className="uppercase border-background" variant="hollow">
           Experience Excellence
         </Button>
       </div>

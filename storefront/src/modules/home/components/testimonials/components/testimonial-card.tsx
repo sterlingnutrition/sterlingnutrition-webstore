@@ -18,7 +18,7 @@ const TestimonialCard = ({ title, description, name }: Testimonial) => {
 
       {/* Testimonial content */}
       <div className="flex-1">
-        <h3 className="mb-6 italic text-subtitle font-playfair !text-background">
+        <h3 className="mb-6 italic text-subtitle font-elegant !text-background">
           {title}
         </h3>
         <p className="max-w-4xl mb-6 text-body-sm">{description}</p>

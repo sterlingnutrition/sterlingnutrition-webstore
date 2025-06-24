@@ -22,10 +22,10 @@ const ShowcaseSection = ({
     >
       <div className="flex flex-col justify-center w-full p-10 lg:px-16 text-background bg-gradient-to-tr from-slate-950 to-slate-800 lg:w-1/2 min-h-96">
         <TextReveal>
-          <h2 className="mb-2 italic md:mb-4 text-subtitle-sm font-playfair !text-background">
+          <h2 className="mb-2 italic md:mb-4 text-subtitle-sm font-elegant !text-background">
             {name}
           </h2>
-          <h1 className="mb-10 text-subtitle font-playfair !text-background">
+          <h1 className="mb-10 text-subtitle font-elegant !text-background">
             {description}
           </h1>
         </TextReveal>

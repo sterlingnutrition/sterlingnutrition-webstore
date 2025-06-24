@@ -86,8 +86,8 @@
 }
 
 @theme {
-  --font-playfair: "Playfair Display", serif;
-  --font-roboto: "Roboto", sans-serif;
+  --font-elegant: "Playfair Display", serif;
+  --font-base: "Montserrat", sans-serif;
 }
 
 @layer utilities {
@@ -96,7 +96,7 @@
   }
 
   .text-title-sm {
-    @apply text-5xl font-light tracking-tight md:text-6xl lg:text-7xl xl:text-8xl text-slate-800;
+    @apply text-5xl font-light tracking-tight md:text-6xl lg:text-7xl 2xl:text-8xl text-slate-800;
   }
 
   .text-subtitle {
@@ -104,11 +104,15 @@
   }
 
   .text-subtitle-sm {
-    @apply text-2xl tracking-tighter md:text-3xl lg:text-4xl 2xl:text-5xl text-slate-800;
+    @apply text-xl tracking-tighter md:text-2xl lg:text-3xl 2xl:text-4xl text-slate-800;
   }
 
   .text-body {
     @apply text-base lg:text-lg 2xl:text-xl;
+  }
+
+  .text-body-playfair {
+    @apply text-lg lg:text-xl 2xl:text-2xl;
   }
 
   .text-body-sm {

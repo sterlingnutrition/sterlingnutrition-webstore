@@ -4,8 +4,13 @@ import Back from "@modules/common/icons/back"
 import FastDelivery from "@modules/common/icons/fast-delivery"
 import Refresh from "@modules/common/icons/refresh"
 
-import Accordion from "./accordion"
 import { HttpTypes } from "@medusajs/types"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "components/ui/accordion"
 
 type ProductTabsProps = {
   product: HttpTypes.StoreProduct
@@ -13,6 +18,10 @@ type ProductTabsProps = {
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = [
+    {
+      label: "Description",
+      component: <ProductInfoTab product={product} />,
+    },
     {
       label: "Product Information",
       component: <ProductInfoTab product={product} />,
@@ -24,17 +33,22 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
   ]
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-16">
       <Accordion type="multiple">
         {tabs.map((tab, i) => (
-          <Accordion.Item
+          <AccordionItem
             key={i}
             title={tab.label}
-            headingSize="medium"
             value={tab.label}
+            className="px-4 border-t border-b-0 last:border-b border-foreground/90"
           >
-            {tab.component}
-          </Accordion.Item>
+            <AccordionTrigger className="font-medium text-body-sm">
+              {tab.label}
+            </AccordionTrigger>
+            <AccordionContent className="text-body text-muted-foreground">
+              {tab.component}
+            </AccordionContent>
+          </AccordionItem>
         ))}
       </Accordion>
     </div>
@@ -43,7 +57,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
   return (
-    <div className="text-small-regular py-8">
+    <div className="py-8 text-small-regular">
       <div className="grid grid-cols-2 gap-x-8">
         <div className="flex flex-col gap-y-4">
           <div>
@@ -80,7 +94,7 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
 
 const ShippingInfoTab = () => {
   return (
-    <div className="text-small-regular py-8">
+    <div className="py-8 text-small-regular">
       <div className="grid grid-cols-1 gap-y-8">
         <div className="flex items-start gap-x-2">
           <FastDelivery />

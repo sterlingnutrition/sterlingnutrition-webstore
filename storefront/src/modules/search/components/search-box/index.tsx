@@ -54,13 +54,13 @@ const ControlledSearchBox = ({
             type="search"
             value={value}
             onChange={onChange}
-            className="txt-compact-large h-6 placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-hidden flex-1 bg-transparent "
+            className="flex-1 h-6 bg-transparent txt-compact-large placeholder:transition-colors focus:outline-hidden "
           />
           {value && (
             <button
               onClick={handleReset}
               type="button"
-              className="items-center justify-center text-ui-fg-on-color focus:outline-hidden gap-x-2 px-2 txt-compact-large flex"
+              className="flex items-center justify-center px-2 text-ui-fg-on-color focus:outline-hidden gap-x-2 txt-compact-large"
             >
               <XMarkMini />
               Cancel

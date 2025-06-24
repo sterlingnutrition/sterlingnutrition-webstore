@@ -9,10 +9,10 @@ const CTA = () => {
       {/* Content Container */}
       <div className="relative z-10 flex flex-col items-center max-w-4xl text-center">
         <TextReveal>
-          <h1 className="mb-2 italic font-semibold text-subtitle-sm md:mb-6 font-playfair">
+          <h1 className="mb-2 italic font-semibold text-subtitle-sm md:mb-6 font-elegant">
             {"Trial Kit"}
           </h1>
-          <h2 className="mb-10 text-subtitle font-playfair">
+          <h2 className="mb-10 text-subtitle font-elegant">
             {"Experience the Best of Natural Supplements"}
           </h2>
           <p className="mb-10 text-body-sm">

@@ -26,7 +26,7 @@ export default function ProductRail({
   return (
     <div className="px-4 py-16 mx-auto sm:px-10 ">
       <TextReveal>
-        <h1 className="mb-10 text-center uppercase lg:mb-16 text-title font-playfair">
+        <h1 className="mb-10 text-center uppercase lg:mb-16 text-title-sm font-elegant">
           {collection.title}
         </h1>
       </TextReveal>
@@ -36,7 +36,7 @@ export default function ProductRail({
             products.map((product) => (
               <Slider
                 key={product.id}
-                className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 embla__slide"
+                className="w-1/2 pr-5 2xl:pr-10 md:w-1/3 lg:w-1/4 2xl:w-1/5 embla__slide"
               >
                 <ProductPreview product={product} region={region} isFeatured />
               </Slider>

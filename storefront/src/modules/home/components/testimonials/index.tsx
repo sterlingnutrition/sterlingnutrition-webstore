@@ -49,7 +49,7 @@ const Testimonials = () => {
   return (
     <>
       <div className="flex justify-center w-full bg-foreground">
-        <h2 className="text-body py-4 inline-flex capitalize items-center font-playfair text-center !text-background">
+        <h2 className="text-body py-4 inline-flex capitalize items-center font-elegant text-center !text-background">
           <SquareDot className="mr-2 size-4" />
           <TextReveal>
             <span>Client Reviews</span>

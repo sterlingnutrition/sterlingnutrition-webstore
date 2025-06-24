@@ -1,8 +1,5 @@
 import React, { Suspense } from "react"
-
-import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
-import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta"
 import ProductTabs from "@modules/products/components/product-tabs"
 import RelatedProducts from "@modules/products/components/related-products"
 import ProductInfo from "@modules/products/templates/product-info"
@@ -10,6 +7,10 @@ import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-relat
 import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import { HttpTypes } from "@medusajs/types"
+import CTA from "@modules/home/components/cta"
+import TrustSection from "@modules/home/components/trust-section/page"
+import FAQ from "@modules/home/components/faq"
+import ImageCarousel from "components/ui/image-carousel"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -29,18 +30,21 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <>
       <div
-        className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
+        className="flex flex-col gap-10 px-4 py-16 mx-auto md:flex-row sm:px-10"
         data-testid="product-container"
       >
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
+        <div className="flex flex-col w-full">
+          <ImageCarousel
+            images={product?.images || []}
+            className="md:mt-4"
+            data-testid="product-image-carousel"
+            imageFit="cover"
+            aspectRatio="square"
+            thumbPosition="left"
+          />
+        </div>
+        <div className="flex flex-col w-full">
           <ProductInfo product={product} />
-          <ProductTabs product={product} />
-        </div>
-        <div className="block w-full relative">
-          <ImageGallery images={product?.images || []} />
-        </div>
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
-          <ProductOnboardingCta />
           <Suspense
             fallback={
               <ProductActions
@@ -52,16 +56,17 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
+          <ProductTabs product={product} />
         </div>
       </div>
-      <div
-        className="content-container my-16 small:my-32"
-        data-testid="related-products-container"
-      >
+      <FAQ />
+      <div data-testid="related-products-container">
         <Suspense fallback={<SkeletonRelatedProducts />}>
           <RelatedProducts product={product} countryCode={countryCode} />
         </Suspense>
       </div>
+      <CTA />
+      <TrustSection />
     </>
   )
 }

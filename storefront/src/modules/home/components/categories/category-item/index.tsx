@@ -23,13 +23,13 @@ const CategoryItem = ({
     >
       <div className="w-full px-4 ">
         <div className="transition-all duration-500 ease-in-out md:translate-y-1/2 md:group-hover:translate-y-0">
-          <h1 className="w-full text-subtitle font-playfair !text-background">
+          <h1 className="w-full text-subtitle font-elegant !text-background">
             {name}
           </h1>
           <div className="w-full group-hover:via-transparent h-[1px] bg-gradient-to-r from-background to-transparent" />
         </div>
         <Button
-          className="!p-4 md:!p-6 mt-4 uppercase md:mt-6 md:opacity-0 md:-translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 border-background font-roboto"
+          className="!p-4 md:!p-6 mt-4 uppercase md:mt-6 md:opacity-0 md:-translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 border-background"
           variant="hollow"
         >
           Shop Now
