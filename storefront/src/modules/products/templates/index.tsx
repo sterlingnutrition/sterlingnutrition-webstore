@@ -11,6 +11,8 @@ import CTA from "@modules/home/components/cta"
 import TrustSection from "@modules/home/components/trust-section/page"
 import FAQ from "@modules/home/components/faq"
 import ImageCarousel from "components/ui/image-carousel"
+import Breadcrumbs from "@modules/common/components/breadcrumbs"
+import { BreadcrumbItemProps } from "@modules/common/components/breadcrumbs/use-breadcrumbs"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -27,10 +29,28 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     return notFound()
   }
 
+  const crumbs: BreadcrumbItemProps[] = [
+    {
+      label:
+        product.collection?.title ||
+        product.categories?.[0].name ||
+        "Collections",
+      href: `/collections/${
+        product.collection?.handle ||
+        `/categories/${product.categories?.[0].handle}` ||
+        "/"
+      }`,
+    },
+    {
+      label: product.title,
+      href: `/products/${product.handle}`,
+    },
+  ]
+
   return (
-    <>
+    <div className="px-4 py-16 mx-auto space-y-10 sm:px-10">
       <div
-        className="flex flex-col gap-10 px-4 py-16 mx-auto md:flex-row sm:px-10"
+        className="flex flex-col gap-10 md:flex-row "
         data-testid="product-container"
       >
         <div className="flex flex-col w-full">
@@ -43,7 +63,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             thumbPosition="left"
           />
         </div>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full space-y-2">
+          <Breadcrumbs breadcrumbs={crumbs} />
           <ProductInfo product={product} />
           <Suspense
             fallback={
@@ -67,7 +88,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
       <CTA />
       <TrustSection />
-    </>
+    </div>
   )
 }
 

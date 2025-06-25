@@ -1,5 +1,5 @@
 import { clx } from "@medusajs/ui"
-import React from "react"
+import React, { Fragment } from "react"
 import {
   UseHitsProps,
   useHits,
@@ -8,6 +8,7 @@ import {
 
 import { ProductHit } from "../hit"
 import ShowAll from "../show-all"
+import { Separator } from "components/ui/separator"
 
 type HitsProps<THit> = React.ComponentProps<"div"> &
   UseHitsProps & {
@@ -25,7 +26,7 @@ const Hits = ({
   return (
     <div
       className={clx(
-        "transition-[height,max-height,opacity] duration-300 ease-in-out sm:overflow-hidden w-full sm:w-[50vw] mb-1 p-px",
+        "transition-[height,max-height,opacity] duration-300 ease-in-out sm:overflow-hidden w-full max-w-[800px]",
         className,
         {
           "max-h-full opacity-100": !!query,
@@ -33,19 +34,18 @@ const Hits = ({
         }
       )}
     >
-      <div
-        className="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-3"
-        data-testid="search-results"
-      >
-        {hits.slice(0, 6).map((hit, index) => (
-          <li
-            key={index}
-            className={clx("list-none", {
-              "hidden sm:block": index > 2,
-            })}
-          >
-            <Hit hit={hit as unknown as ProductHit} />
-          </li>
+      <div className="grid grid-cols-1 gap-1 mb-4" data-testid="search-results">
+        {hits.map((hit, index) => (
+          <Fragment key={index}>
+            <li
+              className={clx("list-none", {
+                "hidden sm:block": index > 2,
+              })}
+            >
+              <Hit hit={hit as unknown as ProductHit} />
+            </li>
+            <Separator />
+          </Fragment>
         ))}
       </div>
       <ShowAll />

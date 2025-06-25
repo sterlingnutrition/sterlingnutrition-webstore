@@ -9,14 +9,14 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   return (
     <div id="product-info">
       <div className="flex flex-col">
-        {product.collection && (
+        {/* {product.collection && (
           <LocalizedClientLink
             href={`/collections/${product.collection.handle}`}
             className="text-body text-muted-foreground"
           >
             {product.collection.title}
           </LocalizedClientLink>
-        )}
+        )} */}
         <h2
           className="mt-2 mb-4 font-semibold text-subtitle-sm"
           data-testid="product-title"

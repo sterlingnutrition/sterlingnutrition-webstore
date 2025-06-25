@@ -20,9 +20,9 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         hollow:
-          "border hover:!px-10 transition-all duration-500 !p-6 rounded-full border-primary text-body-sm font-elegant tracking-[0.25em] ",
+          "border hover:!px-6 md:hover:!px-10 transition-all duration-500 !p-6 rounded-full border-primary border-y-[1px] font-bold text-body-sm font-elegant tracking-[0.25em] ",
         stack:
-          "border-t border-b border-foreground rounded-none w-full max-w-[10rem] py-2 hover:font-semibold tracking-[0.35em] transition-all border-foreground/90 font-elegant",
+          "border-t border-b border-foreground font-medium rounded-none w-full max-w-[10rem] py-2 hover:font-bold tracking-[0.35em] transition-all border-foreground/90 font-elegant",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

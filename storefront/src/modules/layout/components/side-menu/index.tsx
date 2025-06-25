@@ -1,14 +1,19 @@
 "use client"
 
-import { Popover, Transition } from "@headlessui/react"
-import { ArrowRightMini, XMark } from "@medusajs/icons"
-import { Text, clx, useToggleState } from "@medusajs/ui"
-import { Fragment } from "react"
-
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
-import { Menu } from "lucide-react"
+import { Menu, X } from "lucide-react"
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "components/ui/sheet"
+import { Button } from "components/ui/button"
+import { useState } from "react"
 
 const SideMenuItems = {
   Home: "/",
@@ -19,91 +24,65 @@ const SideMenuItems = {
 }
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
-  const toggleState = useToggleState()
+  const [open, setOpen] = useState(false)
+
+  const close = () => {
+    setOpen(false)
+  }
 
   return (
-    <div className="h-full">
-      <div className="flex items-center h-full">
-        <Popover className="flex h-full">
-          {({ open, close }) => (
-            <>
-              <div className="relative flex h-full">
-                <Popover.Button
-                  data-testid="nav-menu-button"
-                  className="relative flex items-center h-full transition-all duration-200 ease-out focus:outline-hidden hover:text-ui-fg-base"
-                >
-                  <Menu />
-                </Popover.Button>
-              </div>
-
-              <Transition
-                show={open}
-                as={Fragment}
-                enter="transition ease-out duration-150"
-                enterFrom="opacity-0"
-                enterTo="opacity-100 backdrop-blur-2xl"
-                leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 backdrop-blur-2xl"
-                leaveTo="opacity-0"
-              >
-                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
-                  <div
-                    data-testid="nav-menu-popup"
-                    className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6"
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button size="icon" variant="ghost" className="!p-0 !m-0">
+          <Menu className="size-6" />
+        </Button>
+      </SheetTrigger>
+      <SheetContent
+        side="left"
+        showCloseButton={false}
+        className="border-none rounded-r-3xl bg-foreground/60 backdrop-blur-xl text-background"
+      >
+        <SheetHeader>
+          <SheetTitle className="sr-only">Side Menu</SheetTitle>
+          <div className="flex justify-end" id="xmark">
+            <button
+              data-testid="close-menu-button"
+              onClick={close}
+              className="cursor-pointer"
+            >
+              <X />
+            </button>
+          </div>
+        </SheetHeader>
+        <div data-testid="nav-menu-popup" className="flex flex-col h-full">
+          <ul className="flex flex-col items-start justify-start gap-6 p-6">
+            {Object.entries(SideMenuItems).map(([name, href]) => {
+              return (
+                <li key={name}>
+                  <LocalizedClientLink
+                    href={href}
+                    className="text-3xl leading-10 hover:text-muted/80"
+                    onClick={close}
+                    data-testid={`${name.toLowerCase()}-link`}
                   >
-                    <div className="flex justify-end" id="xmark">
-                      <button data-testid="close-menu-button" onClick={close}>
-                        <XMark />
-                      </button>
-                    </div>
-                    <ul className="flex flex-col items-start justify-start gap-6">
-                      {Object.entries(SideMenuItems).map(([name, href]) => {
-                        return (
-                          <li key={name}>
-                            <LocalizedClientLink
-                              href={href}
-                              className="text-3xl leading-10 hover:text-ui-fg-disabled"
-                              onClick={close}
-                              data-testid={`${name.toLowerCase()}-link`}
-                            >
-                              {name}
-                            </LocalizedClientLink>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                    <div className="flex flex-col gap-y-6">
-                      <div
-                        className="flex justify-between"
-                        onMouseEnter={toggleState.open}
-                        onMouseLeave={toggleState.close}
-                      >
-                        {regions && (
-                          <CountrySelect
-                            toggleState={toggleState}
-                            regions={regions}
-                          />
-                        )}
-                        <ArrowRightMini
-                          className={clx(
-                            "transition-transform duration-150",
-                            toggleState.state ? "-rotate-90" : ""
-                          )}
-                        />
-                      </div>
-                      <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Medusa Store. All rights
-                        reserved.
-                      </Text>
-                    </div>
-                  </div>
-                </Popover.Panel>
-              </Transition>
-            </>
-          )}
-        </Popover>
-      </div>
-    </div>
+                    {name}
+                  </LocalizedClientLink>
+                </li>
+              )
+            })}
+          </ul>
+          <SheetFooter className="flex flex-col gap-y-6">
+            {regions && (
+              <CountrySelect onOpenChange={setOpen} regions={regions} />
+            )}
+            <p className="flex justify-between text-xs font-base">
+              © {new Date().getFullYear()} Sterling Nutrition. All rights
+              reserved.
+            </p>
+          </SheetFooter>
+        </div>
+      </SheetContent>
+    </Sheet>
   )
 }
 

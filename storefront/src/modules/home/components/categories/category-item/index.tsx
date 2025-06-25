@@ -45,22 +45,25 @@ const CategoryItem = ({
         <Image
           src={"/categories/leaf-1.webp"}
           alt={name}
-          width={200}
-          height={200}
+          width={180}
+          height={180}
+          objectFit="contain"
           className="absolute top-0 left-0 hidden transition-opacity duration-500 ease-in-out opacity-0 md:block group-hover:opacity-100"
         />
         <Image
           src={"/categories/leaf-2.webp"}
           alt={name}
-          width={200}
-          height={200}
+          width={180}
+          height={180}
+          objectFit="contain"
           className="absolute right-0 hidden transition-opacity duration-500 ease-in-out opacity-0 md:block bottom-10 -rotate-12 group-hover:opacity-100"
         />
         <Image
           src={"/categories/leaf-2.webp"}
           alt={name}
-          width={200}
-          height={200}
+          width={180}
+          height={180}
+          objectFit="contain"
           className="absolute bottom-0 hidden transition-opacity duration-500 ease-in-out opacity-0 md:block -left-10 rotate-225 group-hover:opacity-100"
         />
       </div>

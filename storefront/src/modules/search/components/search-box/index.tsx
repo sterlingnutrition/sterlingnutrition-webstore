@@ -1,10 +1,9 @@
-import { XMarkMini } from "@medusajs/icons"
 import { FormEvent } from "react"
-import { useRouter } from "next/navigation"
 
 import SearchBoxWrapper, {
   ControlledSearchBoxProps,
 } from "../search-box-wrapper"
+import { X } from "lucide-react"
 
 const ControlledSearchBox = ({
   inputRef,
@@ -60,10 +59,10 @@ const ControlledSearchBox = ({
             <button
               onClick={handleReset}
               type="button"
-              className="flex items-center justify-center px-2 text-ui-fg-on-color focus:outline-hidden gap-x-2 txt-compact-large"
+              className="flex items-center justify-center focus:outline-hidden"
             >
-              <XMarkMini />
-              Cancel
+              <X className="size-5" />
+              <span className="sr-only">Clear</span>
             </button>
           )}
         </div>
@@ -73,8 +72,6 @@ const ControlledSearchBox = ({
 }
 
 const SearchBox = () => {
-  const router = useRouter()
-
   return (
     <SearchBoxWrapper>
       {(props) => {

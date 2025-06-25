@@ -24,7 +24,7 @@ const LineItemPrice = ({ item, style = "default" }: LineItemPriceProps) => {
   const hasReducedPrice = currentPrice < originalPrice
 
   return (
-    <div className="flex flex-col gap-x-2 text-ui-fg-subtle items-end">
+    <div className="flex flex-col gap-x-2 text-ui-fg-subtle">
       <div className="text-left">
         {hasReducedPrice && (
           <>

@@ -16,12 +16,11 @@ export default async function Nav() {
       <header className="relative h-16 mx-auto duration-200 bg-white border-b border-ui-border-base">
         <nav className="flex items-center justify-between w-full h-full px-4 mx-auto 2xl:container sm:px-10">
           <div className="flex items-center flex-1 h-full gap-4 basis-0">
-            <div className="h-full">
-              <SideMenu regions={regions} />
-            </div>
+            <SideMenu regions={regions} />
+
             <LocalizedClientLink
               href="/"
-              className="relative uppercase h-14 sm:h-18 aspect-video txt-compact-xlarge-plus hover:text-ui-fg-base"
+              className="relative uppercase h-14 sm:h-18 aspect-video "
               data-testid="nav-store-link"
             >
               <Image
@@ -33,9 +32,9 @@ export default async function Nav() {
             </LocalizedClientLink>
           </div>
 
-          <div className="flex items-center justify-end flex-1 h-full gap-x-4 sm:gap-x-6 basis-0">
+          <div className="flex items-center justify-end flex-1 h-full gap-x-4 sm:gap-x-6 basis-0 font-base">
             <LocalizedClientLink
-              className="hover:text-ui-fg-base"
+              className=""
               href="/search"
               scroll={false}
               data-testid="nav-search-link"
@@ -43,7 +42,7 @@ export default async function Nav() {
               <Search />
             </LocalizedClientLink>
             <LocalizedClientLink
-              className="hover:text-ui-fg-base"
+              className=""
               href="/account"
               data-testid="nav-account-link"
             >
@@ -52,7 +51,7 @@ export default async function Nav() {
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="flex gap-2 hover:text-ui-fg-base"
+                  className="flex gap-2 "
                   href="/cart"
                   data-testid="nav-cart-link"
                 >

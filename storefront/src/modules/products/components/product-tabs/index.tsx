@@ -20,7 +20,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = [
     {
       label: "Description",
-      component: <ProductInfoTab product={product} />,
+      component: <DescriptionTab product={product} />,
     },
     {
       label: "Product Information",
@@ -45,7 +45,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
             <AccordionTrigger className="font-medium text-body-sm">
               {tab.label}
             </AccordionTrigger>
-            <AccordionContent className="text-body text-muted-foreground">
+            <AccordionContent className="text-sm">
               {tab.component}
             </AccordionContent>
           </AccordionItem>
@@ -55,37 +55,39 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
   )
 }
 
+const DescriptionTab = ({ product }: ProductTabsProps) => {
+  return <p>{product.description}</p>
+}
+
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
   return (
-    <div className="py-8 text-small-regular">
-      <div className="grid grid-cols-2 gap-x-8">
-        <div className="flex flex-col gap-y-4">
-          <div>
-            <span className="font-semibold">Material</span>
-            <p>{product.material ? product.material : "-"}</p>
-          </div>
-          <div>
-            <span className="font-semibold">Country of origin</span>
-            <p>{product.origin_country ? product.origin_country : "-"}</p>
-          </div>
-          <div>
-            <span className="font-semibold">Type</span>
-            <p>{product.type ? product.type.value : "-"}</p>
-          </div>
+    <div className="grid grid-cols-2 gap-x-8">
+      <div className="flex flex-col gap-y-4">
+        <div>
+          <span className="font-medium">Material</span>
+          <p>{product.material ? product.material : "-"}</p>
         </div>
-        <div className="flex flex-col gap-y-4">
-          <div>
-            <span className="font-semibold">Weight</span>
-            <p>{product.weight ? `${product.weight} g` : "-"}</p>
-          </div>
-          <div>
-            <span className="font-semibold">Dimensions</span>
-            <p>
-              {product.length && product.width && product.height
-                ? `${product.length}L x ${product.width}W x ${product.height}H`
-                : "-"}
-            </p>
-          </div>
+        <div>
+          <span className="font-medium">Country of origin</span>
+          <p>{product.origin_country ? product.origin_country : "-"}</p>
+        </div>
+        <div>
+          <span className="font-medium">Type</span>
+          <p>{product.type ? product.type.value : "-"}</p>
+        </div>
+      </div>
+      <div className="flex flex-col gap-y-4">
+        <div>
+          <span className="font-medium">Weight</span>
+          <p>{product.weight ? `${product.weight} g` : "-"}</p>
+        </div>
+        <div>
+          <span className="font-medium">Dimensions</span>
+          <p>
+            {product.length && product.width && product.height
+              ? `${product.length}L x ${product.width}W x ${product.height}H`
+              : "-"}
+          </p>
         </div>
       </div>
     </div>
@@ -94,38 +96,36 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
 
 const ShippingInfoTab = () => {
   return (
-    <div className="py-8 text-small-regular">
-      <div className="grid grid-cols-1 gap-y-8">
-        <div className="flex items-start gap-x-2">
-          <FastDelivery />
-          <div>
-            <span className="font-semibold">Fast delivery</span>
-            <p className="max-w-sm">
-              Your package will arrive in 3-5 business days at your pick up
-              location or in the comfort of your home.
-            </p>
-          </div>
+    <div className="grid grid-cols-1 gap-y-8">
+      <div className="flex items-start gap-x-2">
+        <FastDelivery className="mt-1" />
+        <div>
+          <span className="font-medium">Fast delivery</span>
+          <p className="">
+            Your package will arrive in 3-5 business days at your pick up
+            location or in the comfort of your home.
+          </p>
         </div>
-        <div className="flex items-start gap-x-2">
-          <Refresh />
-          <div>
-            <span className="font-semibold">Simple exchanges</span>
-            <p className="max-w-sm">
-              Is the fit not quite right? No worries - we&apos;ll exchange your
-              product for a new one.
-            </p>
-          </div>
+      </div>
+      <div className="flex items-start gap-x-2">
+        <Refresh className="mt-1" />
+        <div>
+          <span className="font-medium">Simple exchanges</span>
+          <p className="">
+            Is the fit not quite right? No worries - we&apos;ll exchange your
+            product for a new one.
+          </p>
         </div>
-        <div className="flex items-start gap-x-2">
-          <Back />
-          <div>
-            <span className="font-semibold">Easy returns</span>
-            <p className="max-w-sm">
-              Just return your product and we&apos;ll refund your money. No
-              questions asked – we&apos;ll do our best to make sure your return
-              is hassle-free.
-            </p>
-          </div>
+      </div>
+      <div className="flex items-start gap-x-2">
+        <Back className="mt-1" />
+        <div>
+          <span className="font-medium">Easy returns</span>
+          <p className="">
+            Just return your product and we&apos;ll refund your money. No
+            questions asked – we&apos;ll do our best to make sure your return is
+            hassle-free.
+          </p>
         </div>
       </div>
     </div>

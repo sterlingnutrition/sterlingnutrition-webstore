@@ -25,26 +25,23 @@ const Hit = ({ hit }: HitProps) => {
       href={`/products/${hit.handle}`}
       data-testid="search-result"
     >
-      <Container
+      <div
         key={hit.id}
-        className="flex items-center w-full gap-2 p-4 sm:p-2 sm:flex-col shadow-elevation-card-rest hover:shadow-elevation-card-hover sm:justify-center"
+        className="flex items-center w-full gap-2 p-2 transition-all rounded-md shadow-elevation-card-rest hover:bg-muted "
       >
         <Thumbnail
           thumbnail={hit.thumbnail}
           size="square"
-          className="w-12 h-12 group sm:h-full sm:w-full"
+          className="size-12 md:size-20 group "
         />
         <div className="flex flex-col justify-between group">
           <div className="flex flex-col">
-            <p
-              className="font-semibold text-center font-elegant text-body-playfair"
-              data-testid="search-result-title"
-            >
+            <p className="font-medium " data-testid="search-result-title">
               {hit.title}
             </p>
           </div>
         </div>
-      </Container>
+      </div>
     </LocalizedClientLink>
   )
 }

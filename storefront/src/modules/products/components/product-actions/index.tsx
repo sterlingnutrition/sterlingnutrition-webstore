@@ -119,7 +119,7 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col mt-4 gap-y-6" ref={actionsRef}>
+      <div className="flex flex-col mt-2 gap-y-6" ref={actionsRef}>
         <ProductPrice product={product} variant={selectedVariant} />
         <div>
           {(product.variants?.length ?? 0) > 1 && (
@@ -141,7 +141,7 @@ export default function ProductActions({
             </div>
           )}
         </div>
-        <div className="flex items-center gap-6 mt-4 mb-6">
+        <div className="flex items-center gap-6">
           <QuantityInput
             quantity={quantity}
             onChange={setQuantity}
