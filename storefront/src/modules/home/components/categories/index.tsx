@@ -52,7 +52,10 @@ const Categories = async () => {
       <Carousel options={{ align: "start" }} activeSlider>
         <SliderContainer className="gap-4">
           {CATEGORIES.map((category, index) => (
-            <Slider key={index} className="w-9/10 lg:w-1/2 embla__slide">
+            <Slider
+              key={index}
+              className="w-9/10 sm:w-8/10 md:w-7/10 lg:w-1/2 3xl:w-2/5 embla__slide"
+            >
               <CategoryItem {...category} />
             </Slider>
           ))}

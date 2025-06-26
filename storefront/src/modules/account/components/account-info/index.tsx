@@ -1,9 +1,10 @@
 import { Disclosure } from "@headlessui/react"
-import { Badge, Button, clx } from "@medusajs/ui"
+import { Badge, clx } from "@medusajs/ui"
 import { useEffect } from "react"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
 import { useFormStatus } from "react-dom"
+import { Button } from "components/ui/button"
 
 type AccountInfoProps = {
   label: string
@@ -13,7 +14,7 @@ type AccountInfoProps = {
   errorMessage?: string
   clearState: () => void
   children?: React.ReactNode
-  'data-testid'?: string
+  "data-testid"?: string
 }
 
 const AccountInfo = ({
@@ -24,7 +25,7 @@ const AccountInfo = ({
   clearState,
   errorMessage = "An error occurred, please try again",
   children,
-  'data-testid': dataTestid
+  "data-testid": dataTestid,
 }: AccountInfoProps) => {
   const { state, close, toggle } = useToggleState()
 
@@ -48,7 +49,9 @@ const AccountInfo = ({
           <span className="uppercase text-ui-fg-base">{label}</span>
           <div className="flex items-center flex-1 basis-0 justify-end gap-x-4">
             {typeof currentInfo === "string" ? (
-              <span className="font-semibold" data-testid="current-info">{currentInfo}</span>
+              <span className="font-semibold" data-testid="current-info">
+                {currentInfo}
+              </span>
             ) : (
               currentInfo
             )}
@@ -121,7 +124,7 @@ const AccountInfo = ({
             <div>{children}</div>
             <div className="flex items-center justify-end mt-2">
               <Button
-                isLoading={pending}
+                loading={pending}
                 className="w-full small:max-w-[140px]"
                 type="submit"
                 data-testid="save-button"

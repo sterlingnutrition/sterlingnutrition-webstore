@@ -2,6 +2,7 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@lib/utils"
+import { Loader } from "lucide-react"
 
 const buttonVariants = cva(
   "inline-flex items-center cursor-pointer justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
@@ -22,7 +23,7 @@ const buttonVariants = cva(
         hollow:
           "border hover:!px-6 md:hover:!px-10 transition-all duration-500 !p-6 rounded-full border-primary border-y-[1px] font-bold text-body-sm font-elegant tracking-[0.25em] ",
         stack:
-          "border-t border-b border-foreground font-medium rounded-none w-full max-w-[10rem] py-2 hover:font-bold tracking-[0.35em] transition-all border-foreground/90 font-elegant",
+          "border-t border-b border-foreground font-medium rounded-none py-2 hover:font-bold tracking-[0.35em] transition-all border-foreground/90 font-elegant",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -43,19 +44,44 @@ function Button({
   variant,
   size,
   asChild = false,
+  loading,
+  disabled,
+  loadingText = "Loading...",
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
+    loading?: boolean
+    loadingText?: string
   }) {
   const Comp = asChild ? Slot : "button"
+
+  if (asChild) {
+    return (
+      <Comp
+        data-slot="button"
+        className={cn(buttonVariants({ variant, size, className }))}
+        disabled={disabled || loading}
+        {...props}
+      />
+    )
+  }
 
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      disabled={disabled || loading}
       {...props}
-    />
+    >
+      {loading ? (
+        <>
+          <Loader className="animate-spin" /> {loadingText}
+        </>
+      ) : (
+        props.children
+      )}
+    </Comp>
   )
 }
 

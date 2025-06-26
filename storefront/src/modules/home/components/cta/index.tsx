@@ -5,7 +5,7 @@ import React from "react"
 
 const CTA = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center px-4 py-16 mx-auto sm:px-10 lg:py-32">
+    <div className="relative flex flex-col items-center justify-center content-container py-16 lg:py-32">
       {/* Content Container */}
       <div className="relative z-10 flex flex-col items-center max-w-4xl text-center">
         <TextReveal>

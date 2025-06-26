@@ -10,6 +10,7 @@
 @theme {
   --font-elegant: "Playfair Display", serif;
   --font-base: "Montserrat", sans-serif;
+  --breakpoint-3xl: 1920px;
 }
 
 @layer utilities {

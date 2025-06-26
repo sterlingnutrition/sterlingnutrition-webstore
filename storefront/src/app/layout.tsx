@@ -5,6 +5,7 @@ import { Metadata } from "next"
 import "styles/globals.css"
 import { cn } from "@lib/utils"
 import QueryProvider from "components/query-provider"
+import { Toaster } from "components/ui/sonner"
 
 const elegant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <QueryProvider>
           <LenisProvider>
             <main className="relative font-base">{props.children}</main>
+            <Toaster />
           </LenisProvider>
         </QueryProvider>
       </body>

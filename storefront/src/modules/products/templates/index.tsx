@@ -48,7 +48,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   ]
 
   return (
-    <div className="px-4 py-16 mx-auto space-y-10 sm:px-10">
+    <div className="content-container py-16 space-y-10">
       <div
         className="flex flex-col gap-10 md:flex-row "
         data-testid="product-container"

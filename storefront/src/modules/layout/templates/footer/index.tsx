@@ -61,7 +61,7 @@ export default async function Footer({
           className="opacity-20"
         />
       </div>
-      <div className="px-4 mx-auto 2xl:container sm:px-10">
+      <div className="content-container">
         <div className="flex flex-col justify-between w-full gap-10 pb-6 lg:pb-16 lg:flex-row lg:items-start lg:text-left">
           <div className="flex flex-col justify-between w-full gap-6 lg:items-start">
             <div className="flex items-center gap-2 lg:justify-start">
@@ -114,7 +114,7 @@ export default async function Footer({
                       >
                         <LocalizedClientLink
                           href={`/categories/${c.handle}`}
-                          className={clx("hover:text-ui-fg-base")}
+                          className={clx("hover:text-ui-fg-base font-medium")}
                         >
                           {c.name}
                         </LocalizedClientLink>

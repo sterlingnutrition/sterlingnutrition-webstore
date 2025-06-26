@@ -27,7 +27,7 @@ const TrustSection = () => {
   return (
     <div className=" md:py-16 lg:py-32">
       <Separator className="hidden md:block bg-gradient-to-r from-transparent via-muted-foreground to-transparent" />
-      <div className="grid grid-cols-1 px-4 mx-auto md:grid-cols-3 sm:px-10">
+      <div className="grid grid-cols-1 content-container md:grid-cols-3">
         {TRUST_ITEMS.map((item) => (
           <div key={item.key} className="flex min-h-48 md:min-h-80">
             <Separator

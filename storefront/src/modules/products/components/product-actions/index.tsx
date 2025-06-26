@@ -14,6 +14,7 @@ import { addToCart } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "components/ui/button"
 import QuantityInput from "components/ui/quantity-input"
+import { toast } from "sonner"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
@@ -114,6 +115,7 @@ export default function ProductActions({
       countryCode,
     })
 
+    toast.success("Product added to cart")
     setIsAdding(false)
   }
 
@@ -155,8 +157,10 @@ export default function ProductActions({
           <Button
             onClick={handleAddToCart}
             disabled={!inStock || !selectedVariant || !!disabled || isAdding}
+            loading={isAdding}
+            loadingText="Adding..."
             variant="stack"
-            className="w-full uppercase font-base"
+            className="flex-1 md:max-w-[10rem] uppercase font-base"
             data-testid="add-product-button"
           >
             {!selectedVariant

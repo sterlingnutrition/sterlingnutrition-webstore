@@ -14,7 +14,7 @@ export default async function Nav() {
   return (
     <div className="sticky inset-x-0 top-0 z-50 group">
       <header className="relative h-16 mx-auto duration-200 bg-white border-b border-ui-border-base">
-        <nav className="flex items-center justify-between w-full h-full px-4 mx-auto 2xl:container sm:px-10">
+        <nav className="flex items-center justify-between w-full h-full content-container">
           <div className="flex items-center flex-1 h-full gap-4 basis-0">
             <SideMenu regions={regions} />
 
@@ -55,7 +55,7 @@ export default async function Nav() {
                   href="/cart"
                   data-testid="nav-cart-link"
                 >
-                  <ShoppingCart /> (0)
+                  <ShoppingCart />0
                 </LocalizedClientLink>
               }
             >
