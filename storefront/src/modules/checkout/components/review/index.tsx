@@ -4,6 +4,7 @@ import { Heading, Text, clx } from "@medusajs/ui"
 
 import PaymentButton from "../payment-button"
 import { useSearchParams } from "next/navigation"
+import { cn } from "@lib/utils"
 
 const Review = ({ cart }: { cart: any }) => {
   const searchParams = useSearchParams()
@@ -21,17 +22,16 @@ const Review = ({ cart }: { cart: any }) => {
   return (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
-        <Heading
-          level="h2"
-          className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+        <h2
+          className={cn(
+            "text-body-playfair font-medium flex flex-row gap-x-2 items-center",
             {
               "opacity-50 pointer-events-none select-none": !isOpen,
             }
           )}
         >
           Review
-        </Heading>
+        </h2>
       </div>
       {isOpen && previousStepsCompleted && (
         <>

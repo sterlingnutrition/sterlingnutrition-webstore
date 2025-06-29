@@ -2,18 +2,20 @@
 
 import { useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { RadioGroup } from "@headlessui/react"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
-import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
+import { Container, Text } from "@medusajs/ui"
 import { CardElement } from "@stripe/react-stripe-js"
 import { StripeCardElementOptions } from "@stripe/stripe-js"
+import * as RadioGroup from "@radix-ui/react-radio-group"
 
 import Divider from "@modules/common/components/divider"
 import PaymentContainer from "@modules/checkout/components/payment-container"
 import { isStripe as isStripeFunc, paymentInfoMap } from "@lib/constants"
 import { StripeContext } from "@modules/checkout/components/payment-wrapper"
 import { initiatePaymentSession } from "@lib/data/cart"
+import { Button } from "components/ui/button"
+import { cn } from "@lib/utils"
 
 const Payment = ({
   cart,
@@ -116,10 +118,9 @@ const Payment = ({
   return (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
-        <Heading
-          level="h2"
-          className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+        <h2
+          className={cn(
+            "text-body-playfair font-medium flex flex-row gap-x-2 items-center",
             {
               "opacity-50 pointer-events-none select-none":
                 !isOpen && !paymentReady,
@@ -128,26 +129,28 @@ const Payment = ({
         >
           Payment
           {!isOpen && paymentReady && <CheckCircleSolid />}
-        </Heading>
+        </h2>
         {!isOpen && paymentReady && (
-          <Text>
-            <button
-              onClick={handleEdit}
-              className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
-              data-testid="edit-payment-button"
-            >
-              Edit
-            </button>
-          </Text>
+          <Button
+            onClick={handleEdit}
+            className="text-body-sm"
+            data-testid="edit-payment-button"
+            variant="link"
+          >
+            Edit
+          </Button>
         )}
       </div>
       <div>
         <div className={isOpen ? "block" : "hidden"}>
           {!paidByGiftcard && availablePaymentMethods?.length && (
             <>
-              <RadioGroup
+              <RadioGroup.Root
                 value={selectedPaymentMethod}
-                onChange={(value: string) => setSelectedPaymentMethod(value)}
+                onValueChange={(value: string) =>
+                  setSelectedPaymentMethod(value)
+                }
+                className="w-full"
               >
                 {availablePaymentMethods
                   .sort((a, b) => {
@@ -163,7 +166,8 @@ const Payment = ({
                       />
                     )
                   })}
-              </RadioGroup>
+              </RadioGroup.Root>
+
               {isStripe && stripeReady && (
                 <div className="mt-5 transition-all duration-150 ease-in-out">
                   <Text className="txt-medium-plus text-ui-fg-base mb-1">
@@ -206,10 +210,10 @@ const Payment = ({
           />
 
           <Button
-            size="large"
+            size="expanded"
             className="mt-6"
             onClick={handleSubmit}
-            isLoading={isLoading}
+            loading={isLoading}
             disabled={
               (isStripe && !cardComplete) ||
               (!selectedPaymentMethod && !paidByGiftcard)
@@ -226,9 +230,7 @@ const Payment = ({
           {cart && paymentReady && activeSession ? (
             <div className="flex items-start gap-x-1 w-full">
               <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment method
-                </Text>
+                <Text className="font-medium  mb-1">Payment method</Text>
                 <Text
                   className="txt-medium text-ui-fg-subtle"
                   data-testid="payment-method-summary"
@@ -238,9 +240,7 @@ const Payment = ({
                 </Text>
               </div>
               <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment details
-                </Text>
+                <Text className="font-medium  mb-1">Payment details</Text>
                 <div
                   className="flex gap-2 txt-medium text-ui-fg-subtle items-center"
                   data-testid="payment-details-summary"

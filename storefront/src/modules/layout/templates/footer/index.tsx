@@ -93,8 +93,8 @@ export default async function Footer({
           <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
             {product_categories && product_categories?.length > 0 && (
               <div>
-                <h3 className="mb-4 font-bold text-body-sm">Categories</h3>
-                <ul className="space-y-3 text-body-sm text-foreground">
+                <h3 className="mb-4 font-semibold text-body-sm">Categories</h3>
+                <ul className="space-y-3 text-body-sm font-normal text-foreground">
                   {product_categories?.slice(0, 6).map((c) => {
                     if (c.parent_category) {
                       return null
@@ -114,7 +114,7 @@ export default async function Footer({
                       >
                         <LocalizedClientLink
                           href={`/categories/${c.handle}`}
-                          className={clx("hover:text-ui-fg-base font-medium")}
+                          className={clx("hover:text-ui-fg-base font-normal")}
                         >
                           {c.name}
                         </LocalizedClientLink>
@@ -141,10 +141,10 @@ export default async function Footer({
 
             {collections && collections.length > 0 && (
               <div>
-                <h3 className="mb-4 font-bold text-body-sm">Collections</h3>
+                <h3 className="mb-4 font-semibold text-body-sm">Collections</h3>
                 <ul className="space-y-3 text-body-sm text-foreground">
                   {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id} className="font-medium hover:text-primary">
+                    <li key={c.id} className="font-normal hover:text-primary">
                       <LocalizedClientLink href={`/collections/${c.handle}`}>
                         {c.title}
                       </LocalizedClientLink>
@@ -155,19 +155,19 @@ export default async function Footer({
             )}
 
             <div>
-              <h3 className="mb-4 font-bold text-body-sm">Company</h3>
+              <h3 className="mb-4 font-semibold text-body-sm">Company</h3>
               <ul className="space-y-3 text-body-sm text-foreground">
-                <li className="font-medium hover:text-primary">
+                <li className="font-normal hover:text-primary">
                   <LocalizedClientLink href="/about">
                     Our Story
                   </LocalizedClientLink>
                 </li>
-                <li className="font-medium hover:text-primary">
+                <li className="font-normal hover:text-primary">
                   <LocalizedClientLink href="/about">
                     Why Sterling
                   </LocalizedClientLink>
                 </li>
-                <li className="font-medium hover:text-primary">
+                <li className="font-normal hover:text-primary">
                   <LocalizedClientLink href="/contact">
                     Contact Us
                   </LocalizedClientLink>

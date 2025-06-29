@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@medusajs/ui"
 import { OnApproveActions, OnApproveData } from "@paypal/paypal-js"
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js"
 import { useElements, useStripe } from "@stripe/react-stripe-js"
@@ -10,6 +9,7 @@ import Spinner from "@modules/common/icons/spinner"
 import { placeOrder } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import { isManual, isPaypal, isStripe } from "@lib/constants"
+import { Button } from "components/ui/button"
 
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
@@ -59,7 +59,11 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
         />
       )
     default:
-      return <Button disabled>Select a payment method</Button>
+      return (
+        <Button disabled size="expanded">
+          Select a payment method
+        </Button>
+      )
   }
 }
 
@@ -74,7 +78,8 @@ const GiftCardPaymentButton = () => {
   return (
     <Button
       onClick={handleOrder}
-      isLoading={submitting}
+      size="expanded"
+      loading={submitting}
       data-testid="submit-order-button"
     >
       Place order
@@ -175,8 +180,8 @@ const StripePaymentButton = ({
       <Button
         disabled={disabled || notReady}
         onClick={handlePayment}
-        size="large"
-        isLoading={submitting}
+        size="expanded"
+        loading={submitting}
         data-testid={dataTestId}
       >
         Place order
@@ -283,9 +288,9 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
     <>
       <Button
         disabled={notReady}
-        isLoading={submitting}
         onClick={handlePayment}
-        size="large"
+        size="expanded"
+        loading={submitting}
         data-testid="submit-order-button"
       >
         Place order

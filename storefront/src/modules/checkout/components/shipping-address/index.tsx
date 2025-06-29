@@ -1,7 +1,7 @@
 import { HttpTypes } from "@medusajs/types"
 import { Container } from "@medusajs/ui"
 import Checkbox from "@modules/common/components/checkbox"
-import Input from "@modules/common/components/input"
+import { FloatingLabelInput as Input } from "components/ui/floating-input"
 import { mapKeys } from "lodash"
 import React, { useEffect, useMemo, useState } from "react"
 import AddressSelect from "../address-select"
@@ -109,6 +109,7 @@ const ShippingAddress = ({
           required
           data-testid="shipping-first-name-input"
         />
+        <div className="relative"></div>
         <Input
           label="Last name"
           name="shipping_address.last_name"

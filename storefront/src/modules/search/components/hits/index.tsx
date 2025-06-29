@@ -37,11 +37,7 @@ const Hits = ({
       <div className="grid grid-cols-1 gap-1 mb-4" data-testid="search-results">
         {hits.map((hit, index) => (
           <Fragment key={index}>
-            <li
-              className={clx("list-none", {
-                "hidden sm:block": index > 2,
-              })}
-            >
+            <li className={clx("list-none")}>
               <Hit hit={hit as unknown as ProductHit} />
             </li>
             <Separator />

@@ -1,11 +1,11 @@
-import { Badge } from "@medusajs/ui"
+import { cn } from "@lib/utils"
 
 const PaymentTest = ({ className }: { className?: string }) => {
   return (
-    <Badge color="orange" className={className}>
+    <span className={cn("text-sm ", className)}>
       <span className="font-semibold">Attention:</span> For testing purposes
       only.
-    </Badge>
+    </span>
   )
 }
 

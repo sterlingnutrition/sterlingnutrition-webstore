@@ -1,17 +1,18 @@
 "use client"
 
-import { RadioGroup } from "@headlessui/react"
 import { CheckCircleSolid } from "@medusajs/icons"
-import { Button, Heading, Text, clx } from "@medusajs/ui"
+import { Text } from "@medusajs/ui"
 
 import Divider from "@modules/common/components/divider"
-import Radio from "@modules/common/components/radio"
+import * as RadioGroup from "@radix-ui/react-radio-group"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { setShippingMethod } from "@lib/data/cart"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
+import { Button } from "components/ui/button"
+import { cn } from "@lib/utils"
 
 type ShippingProps = {
   cart: HttpTypes.StoreCart
@@ -62,10 +63,9 @@ const Shipping: React.FC<ShippingProps> = ({
   return (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
-        <Heading
-          level="h2"
-          className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+        <h2
+          className={cn(
+            "text-body-playfair font-medium flex flex-row gap-x-2 items-center",
             {
               "opacity-50 pointer-events-none select-none":
                 !isOpen && cart.shipping_methods?.length === 0,
@@ -76,56 +76,56 @@ const Shipping: React.FC<ShippingProps> = ({
           {!isOpen && (cart.shipping_methods?.length ?? 0) > 0 && (
             <CheckCircleSolid />
           )}
-        </Heading>
+        </h2>
         {!isOpen &&
           cart?.shipping_address &&
           cart?.billing_address &&
           cart?.email && (
-            <Text>
-              <button
-                onClick={handleEdit}
-                className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
-                data-testid="edit-delivery-button"
-              >
-                Edit
-              </button>
-            </Text>
+            <Button
+              onClick={handleEdit}
+              className="text-body-sm"
+              data-testid="edit-delivery-button"
+              variant="link"
+            >
+              Edit
+            </Button>
           )}
       </div>
       {isOpen ? (
         <div data-testid="delivery-options-container">
           <div className="pb-8">
-            <RadioGroup value={selectedShippingMethod?.id} onChange={set}>
+            <RadioGroup.Root
+              value={selectedShippingMethod?.id}
+              onValueChange={set}
+              className="w-full"
+            >
               {availableShippingMethods?.map((option) => {
                 return (
-                  <RadioGroup.Option
+                  <RadioGroup.Item
                     key={option.id}
                     value={option.id}
-                    data-testid="delivery-option-radio"
-                    className={clx(
-                      "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
-                      {
-                        "border-ui-border-interactive":
-                          option.id === selectedShippingMethod?.id,
-                      }
-                    )}
+                    className="ring-[1px] w-full ring-border rounded p-4 data-[state=checked]:ring-2 data-[state=checked]:ring-blue-500"
                   >
-                    <div className="flex items-center gap-x-4">
-                      <Radio
-                        checked={option.id === selectedShippingMethod?.id}
+                    <div className="flex items-center w-full gap-x-4">
+                      <div
+                        className={cn(
+                          "size-2 bg-muted-foreground rounded-full",
+                          option.id === selectedShippingMethod?.id &&
+                            "bg-blue-500"
+                        )}
                       />
-                      <span className="text-base-regular">{option.name}</span>
+                      <span className="font-medium mr-auto">{option.name}</span>
+                      <span className="justify-self-end text-ui-fg-base">
+                        {convertToLocale({
+                          amount: option.amount!,
+                          currency_code: cart?.currency_code,
+                        })}
+                      </span>
                     </div>
-                    <span className="justify-self-end text-ui-fg-base">
-                      {convertToLocale({
-                        amount: option.amount!,
-                        currency_code: cart?.currency_code,
-                      })}
-                    </span>
-                  </RadioGroup.Option>
+                  </RadioGroup.Item>
                 )
               })}
-            </RadioGroup>
+            </RadioGroup.Root>
           </div>
 
           <ErrorMessage
@@ -134,10 +134,10 @@ const Shipping: React.FC<ShippingProps> = ({
           />
 
           <Button
-            size="large"
+            size="expanded"
             className="mt-6"
             onClick={handleSubmit}
-            isLoading={isLoading}
+            loading={isLoading}
             disabled={!cart.shipping_methods?.[0]}
             data-testid="submit-delivery-option-button"
           >
@@ -149,9 +149,7 @@ const Shipping: React.FC<ShippingProps> = ({
           <div className="text-small-regular">
             {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
               <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Method
-                </Text>
+                <Text className="font-medium  mb-1">Method</Text>
                 <Text className="txt-medium text-ui-fg-subtle">
                   {selectedShippingMethod?.name}{" "}
                   {convertToLocale({

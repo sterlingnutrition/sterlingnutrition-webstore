@@ -11,6 +11,13 @@
   --font-elegant: "Playfair Display", serif;
   --font-base: "Montserrat", sans-serif;
   --breakpoint-3xl: 1920px;
+  --breakpoint-2xsmall: 320px;
+  --breakpoint-xsmall: 512px;
+  --breakpoint-small: 1024px;
+  --breakpoint-medium: 1280px;
+  --breakpoint-large: 1440px;
+  --breakpoint-xlarge: 1680px;
+  --breakpoint-2xlarge: 1920px;
 }
 
 @layer utilities {

@@ -11,17 +11,10 @@ type ShippingDetailsProps = {
 const ShippingDetails = ({ order }: ShippingDetailsProps) => {
   return (
     <div>
-      <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
-        Delivery
-      </Heading>
-      <div className="flex items-start gap-x-8">
-        <div
-          className="flex flex-col w-1/3"
-          data-testid="shipping-address-summary"
-        >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">
-            Shipping Address
-          </Text>
+      <h1 className="text-body-playfair font-medium my-6">Delivery</h1>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="flex flex-col" data-testid="shipping-address-summary">
+          <Text className="font-medium mb-1">Shipping Address</Text>
           <Text className="txt-medium text-ui-fg-subtle">
             {order.shipping_address?.first_name}{" "}
             {order.shipping_address?.last_name}
@@ -39,22 +32,16 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
           </Text>
         </div>
 
-        <div
-          className="flex flex-col w-1/3 "
-          data-testid="shipping-contact-summary"
-        >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Contact</Text>
+        <div className="flex flex-col" data-testid="shipping-contact-summary">
+          <Text className="font-medium mb-1">Contact</Text>
           <Text className="txt-medium text-ui-fg-subtle">
             {order.shipping_address?.phone}
           </Text>
           <Text className="txt-medium text-ui-fg-subtle">{order.email}</Text>
         </div>
 
-        <div
-          className="flex flex-col w-1/3"
-          data-testid="shipping-method-summary"
-        >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Method</Text>
+        <div className="flex flex-col" data-testid="shipping-method-summary">
+          <Text className="font-medium mb-1">Method</Text>
           <Text className="txt-medium text-ui-fg-subtle">
             {(order as any).shipping_methods[0]?.name} (
             {convertToLocale({
