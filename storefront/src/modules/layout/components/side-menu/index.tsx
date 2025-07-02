@@ -1,9 +1,11 @@
 "use client"
 
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import LocalizedClientLink, {
+  LocalizedClientLinkButton,
+} from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
-import { Menu, X } from "lucide-react"
+import { X } from "lucide-react"
 import {
   Sheet,
   SheetContent,
@@ -12,8 +14,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "components/ui/sheet"
-import { Button } from "components/ui/button"
 import { useState } from "react"
+import { SideMenuBtn } from "./side-menu-btn"
 
 const SideMenuItems = {
   Home: "/",
@@ -33,14 +35,12 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button size="icon" variant="ghost" className="!p-0 !m-0">
-          <Menu className="size-6" />
-        </Button>
+        <SideMenuBtn open={open} setOpen={setOpen} />
       </SheetTrigger>
       <SheetContent
         side="left"
         showCloseButton={false}
-        className="border-none rounded-r-3xl bg-foreground/60 backdrop-blur-xl text-background"
+        className="border-none sm:rounded-r-3xl"
       >
         <SheetHeader>
           <SheetTitle className="sr-only">Side Menu</SheetTitle>
@@ -50,7 +50,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
               onClick={close}
               className="cursor-pointer"
             >
-              <X />
+              <X className="size-10 stroke-1" />
             </button>
           </div>
         </SheetHeader>
@@ -59,14 +59,14 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
             {Object.entries(SideMenuItems).map(([name, href]) => {
               return (
                 <li key={name}>
-                  <LocalizedClientLink
+                  <LocalizedClientLinkButton
                     href={href}
-                    className="text-3xl leading-10 hover:text-muted/80"
+                    className="text-subtitle "
                     onClick={close}
                     data-testid={`${name.toLowerCase()}-link`}
                   >
                     {name}
-                  </LocalizedClientLink>
+                  </LocalizedClientLinkButton>
                 </li>
               )
             })}
@@ -75,7 +75,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
             {regions && (
               <CountrySelect onOpenChange={setOpen} regions={regions} />
             )}
-            <p className="flex justify-between text-xs font-base">
+            <p className="flex justify-between text-body">
               © {new Date().getFullYear()} Sterling Nutrition. All rights
               reserved.
             </p>

@@ -61,7 +61,7 @@ const CountrySelect = ({ onOpenChange, regions }: CountrySelectProps) => {
   }
 
   return (
-    <div className="flex items-center text-xs gap-x-2">
+    <div className="flex items-center text-body gap-x-2">
       <span>Shipping to:</span>
       <Select value={current?.country} onValueChange={handleChange}>
         <SelectTrigger className="flex-1 border-t-0 border-b rounded-none shadow-none border-x-0 gap-x-2 focus:ring-offset-0 focus:ring-0">
@@ -74,7 +74,7 @@ const CountrySelect = ({ onOpenChange, regions }: CountrySelectProps) => {
               value={o.country}
               className="cursor-pointer"
             >
-              <div className="flex items-center gap-x-2">
+              <div className="flex text-body items-center gap-x-2">
                 <ReactCountryFlag
                   svg
                   style={{

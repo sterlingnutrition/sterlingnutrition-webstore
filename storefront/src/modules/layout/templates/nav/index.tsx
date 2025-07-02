@@ -2,25 +2,36 @@ import { Suspense } from "react"
 
 import { listRegions } from "@lib/data/regions"
 import { StoreRegion } from "@medusajs/types"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import LocalizedClientLink, {
+  LocalizedClientLinkButton,
+} from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import { Search, ShoppingCart, UserRound } from "lucide-react"
 import Image from "next/image"
+
+export const SideMenuItems = {
+  Home: "/",
+  Store: "/store",
+  "About Us": "/about",
+  Contact: "/contact",
+}
 
 export default async function Nav() {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
 
   return (
     <div className="sticky inset-x-0 top-0 z-50 group">
-      <header className="relative h-16 mx-auto duration-200 bg-white border-b border-ui-border-base">
-        <nav className="flex items-center justify-between w-full h-full content-container">
-          <div className="flex items-center flex-1 h-full gap-4 basis-0">
-            <SideMenu regions={regions} />
+      <header className="relative mx-auto duration-200 bg-white border-b border-ui-border-base">
+        <nav className="grid grid-cols-2 lg:grid-cols-5 w-full content-container ">
+          <div className="flex items-center h-full gap-4">
+            <div className="lg:hidden">
+              <SideMenu regions={regions} />
+            </div>
 
             <LocalizedClientLink
               href="/"
-              className="relative uppercase h-14 sm:h-18 aspect-video "
+              className="relative uppercase h-14 md:h-16 aspect-video"
               data-testid="nav-store-link"
             >
               <Image
@@ -31,22 +42,36 @@ export default async function Nav() {
               />
             </LocalizedClientLink>
           </div>
+          <ul className="hidden lg:flex items-center  lg:col-span-3 justify-center gap-8">
+            {Object.entries(SideMenuItems).map(([name, href]) => {
+              return (
+                <li key={name}>
+                  <LocalizedClientLinkButton
+                    href={href}
+                    className="text-body-sm text-foreground"
+                    data-testid={`${name.toLowerCase()}-link`}
+                  >
+                    {name}
+                  </LocalizedClientLinkButton>
+                </li>
+              )
+            })}
+          </ul>
 
           <div className="flex items-center justify-end flex-1 h-full gap-x-4 sm:gap-x-6 basis-0 font-base">
             <LocalizedClientLink
               className=""
               href="/search"
-              scroll={false}
               data-testid="nav-search-link"
             >
-              <Search />
+              <Search className="stroke-[1.5]" />
             </LocalizedClientLink>
             <LocalizedClientLink
               className=""
               href="/account"
               data-testid="nav-account-link"
             >
-              <UserRound />
+              <UserRound className="stroke-[1.5]" />
             </LocalizedClientLink>
             <Suspense
               fallback={
@@ -55,7 +80,7 @@ export default async function Nav() {
                   href="/cart"
                   data-testid="nav-cart-link"
                 >
-                  <ShoppingCart />0
+                  <ShoppingCart className="stroke-[1.5]" />0
                 </LocalizedClientLink>
               }
             >

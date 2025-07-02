@@ -4,7 +4,9 @@ import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 import DeleteButton from "@modules/common/components/delete-button"
 import LineItemPrice from "@modules/common/components/line-item-price"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import LocalizedClientLink, {
+  LocalizedClientLinkButton,
+} from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
 import { ShoppingCart, X } from "lucide-react"
 import {
@@ -12,14 +14,17 @@ import {
   SheetClose,
   SheetContent,
   SheetFooter,
+  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "components/ui/sheet"
 import { Button } from "components/ui/button"
 import { ScrollArea } from "components/ui/scroll-area"
 import { useState } from "react"
-import { Separator } from "components/ui/separator"
 import LineItemOptions from "@modules/common/components/line-item-options"
+import CartItemSelect from "@modules/cart/components/cart-item-select"
+import { updateLineItem } from "@lib/data/cart"
+import Spinner from "@modules/common/icons/spinner"
 
 const CartDropdown = ({
   cart: cartState,
@@ -41,35 +46,37 @@ const CartDropdown = ({
           className="flex gap-1 cursor-pointer"
           data-testid="nav-cart-link"
         >
-          <ShoppingCart />
+          <ShoppingCart className="stroke-[1.5]" />
           <span className="font-medium text-body-sm">{totalItems}</span>
         </button>
       </SheetTrigger>
       <SheetContent
         data-testid="nav-cart-dropdown"
         showCloseButton={false}
-        className="rounded-l-3xl flex flex-col sm:max-w-xl"
+        className="sm:rounded-l-3xl flex flex-col"
       >
-        <SheetTitle className="flex items-center justify-between px-4 pt-4 lg:pt-6 lg:px-6">
-          {Boolean(cartState && cartState.items?.length) ? (
-            <div className="flex items-center gap-2">
-              <h3 className="font-bold text-body-playfair">Cart</h3>
-              <div className="font-medium items-center justify-center flex text-sm bg-foreground text-background rounded-full size-6">
-                <span>{totalItems}</span>
-              </div>
-            </div>
-          ) : (
-            <div />
-          )}
-          <SheetClose>
-            <X />
-          </SheetClose>
-        </SheetTitle>
+        <SheetHeader>
+          <SheetTitle className="flex items-center justify-between">
+            <h3 className="text-subtitle-sm font-normal inline-flex gap-2">
+              Cart <span className="text-body-sm">({totalItems})</span>
+            </h3>
+
+            <SheetClose>
+              <button
+                data-testid="close-menu-button"
+                onClick={close}
+                className="cursor-pointer"
+              >
+                <X className="size-10 stroke-1" />
+              </button>
+            </SheetClose>
+          </SheetTitle>
+        </SheetHeader>
 
         {cartState && cartState.items?.length ? (
           <>
             <div className="flex flex-col h-[calc(100vh-3.8rem)] gap-4">
-              <ScrollArea className="flex-1 overflow-y-auto p-4 lg:p-6">
+              <ScrollArea className="flex-1 overflow-y-auto px-4 lg:px-6">
                 <div className="space-y-4 ">
                   {cartState.items
                     .sort((a, b) => {
@@ -83,12 +90,12 @@ const CartDropdown = ({
                 </div>
               </ScrollArea>
 
-              <SheetFooter className="flex flex-col border-t gap-y-4 mt-auto lg:p-6">
+              <SheetFooter className="flex flex-col border-t gap-y-1 mt-auto lg:p-6">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-body">Total</span>
+                    <span className="font-medium text-body-sm">Total</span>
                     <span
-                      className="font-semibold text-body"
+                      className="font-medium text-body-sm"
                       data-testid="cart-subtotal"
                       data-value={subtotal}
                     >
@@ -99,11 +106,12 @@ const CartDropdown = ({
                     </span>
                   </div>
                   <span className="text-sm text-muted-foreground">
-                    Taxes and shipping calculated at checkout
+                    Shipping, taxes, and discount codes are calculated at
+                    checkout
                   </span>
                 </div>
-                <div className="flex gap-2 w-full">
-                  <LocalizedClientLink href="/cart" passHref className="w-full">
+                <div className="flex gap-2 mt-3 w-full">
+                  <LocalizedClientLink href="/cart" className="w-full">
                     <Button
                       className="w-full flex-1 rounded-full"
                       size="expanded"
@@ -115,7 +123,6 @@ const CartDropdown = ({
                   </LocalizedClientLink>
                   <LocalizedClientLink
                     href="/checkout?step=address"
-                    passHref
                     className="w-full "
                   >
                     <Button
@@ -132,19 +139,19 @@ const CartDropdown = ({
             </div>
           </>
         ) : (
-          <div className="flex flex-col items-center justify-center w-full h-full gap-y-6">
-            <ShoppingCart className="size-16" />
-            <span className="font-semibold text-body-playfair">
-              Your cart is empty.
+          <div className="flex flex-col items-center justify-center w-full text-subtitle-sm h-full">
+            <span className="">Your cart is</span>
+            <span className="font-elegant italic text-subtitle !font-semibold mb-6">
+              empty
             </span>
             <div>
               <LocalizedClientLink href="/store">
                 <>
                   <span className="sr-only">Go to all products page</span>
                   <Button
-                    onClick={close}
-                    className="uppercase rounded-full"
-                    size="expanded"
+                    onClick={() => setOpen(false)}
+                    className="uppercase"
+                    variant="stack"
                   >
                     Continue Shopping
                   </Button>
@@ -165,48 +172,87 @@ interface CartItemProps {
 }
 
 const CartItem = ({ item }: CartItemProps) => {
+  const [updating, setUpdating] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const changeQuantity = async (quantity: number) => {
+    setError(null)
+    setUpdating(true)
+
+    const message = await updateLineItem({
+      lineId: item.id,
+      quantity,
+    })
+      .catch((err) => {
+        setError(err.message)
+      })
+      .finally(() => {
+        setUpdating(false)
+      })
+  }
+  const maxQtyFromInventory = 10
+  const maxQuantity = item.variant?.manage_inventory ? 10 : maxQtyFromInventory
+
   return (
-    <div className="flex gap-3 items-start transition-colors">
-      <LocalizedClientLink
-        href={`/products/${item.variant?.product?.handle}`}
-        className="flex-shrink-0"
-      >
+    <div className="grid grid-cols-5 gap-6 transition-colors">
+      <div>
         <Thumbnail
           thumbnail={item.variant?.product?.thumbnail}
           images={item.variant?.product?.images}
           size="square"
-          className="size-16 md:size-20 lg:size-24 rounded-sm border"
+          className="size-16 lg:size-20 rounded-sm"
         />
-      </LocalizedClientLink>
+      </div>
 
-      <div className="flex-1 min-w-0">
+      <div className="col-span-3 ml-6 flex flex-col py-0.5">
         <h3 className="font-medium flex-wrap">
-          <LocalizedClientLink
+          <LocalizedClientLinkButton
             href={`/products/${item.variant?.product?.handle}`}
-            className="hover:underline"
+            className="!text-sm"
           >
             {item.title}
-          </LocalizedClientLink>
+          </LocalizedClientLinkButton>
         </h3>
         <LineItemOptions
           variant={item.variant}
           data-testid="product-variant"
           className="text-sm text-muted-foreground"
         />
-        <div className="text-sm text-muted-foreground">
-          Qty: {item.quantity}
-        </div>
-        <div className="font-medium">
+        <div className="text-sm mt-auto">
           <LineItemPrice item={item} />
         </div>
       </div>
+      <div className="flex items-end flex-col justify-between">
+        <DeleteButton
+          id={item.id}
+          className="text-muted-foreground text-sm hover:text-destructive transition-colors"
+        />
+        <div className="flex items-center gap-2">
+          {updating && <Spinner />}
+          <CartItemSelect
+            value={item.quantity}
+            onChange={(value) => changeQuantity(parseInt(value.target.value))}
+            className="w-14 h-6 p-4 text-xs"
+            data-testid="product-select-button"
+          >
+            {/* TODO: Update this with the v2 way of managing inventory */}
+            {Array.from(
+              {
+                length: Math.min(maxQuantity, 10),
+              },
+              (_, i) => (
+                <option value={i + 1} key={i}>
+                  {i + 1}
+                </option>
+              )
+            )}
 
-      <DeleteButton
-        id={item.id}
-        className="text-muted-foreground text-sm hover:text-destructive transition-colors"
-      >
-        Remove
-      </DeleteButton>
+            <option value={1} key={1}>
+              1
+            </option>
+          </CartItemSelect>
+        </div>
+      </div>
     </div>
   )
 }
