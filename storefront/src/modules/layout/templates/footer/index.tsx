@@ -37,12 +37,6 @@ const defaultLegalLinks = [
 ]
 
 export default async function Footer({
-  logo = {
-    url: "https://www.shadcnblocks.com",
-    src: "https://www.shadcnblocks.com/images/block/logos/shadcnblockscom-icon.svg",
-    alt: "logo",
-    title: "Shadcnblocks.com",
-  },
   description = "From Goli Ashwagandha Gummies to 100% Cold-Pressed Black Seed Oil—backed by science, delivered with care.",
   socialLinks = defaultSocialLinks,
   legalLinks = defaultLegalLinks,
@@ -113,7 +107,7 @@ export default async function Footer({
                         className=" text-body-sm hover:text-primary"
                       >
                         <LocalizedClientLink
-                          href={`/categories/${c.handle}`}
+                          href={`/store/categories/${c.handle}`}
                           className={clx("hover:text-ui-fg-base font-normal")}
                         >
                           {c.name}
@@ -124,7 +118,7 @@ export default async function Footer({
                               <li key={child.id}>
                                 <LocalizedClientLink
                                   className="hover:text-ui-fg-base"
-                                  href={`/categories/${child.handle}`}
+                                  href={`/store/categories/${child.handle}`}
                                 >
                                   {child.name}
                                 </LocalizedClientLink>
@@ -145,7 +139,9 @@ export default async function Footer({
                 <ul className="space-y-3 text-body-sm text-foreground">
                   {collections?.slice(0, 6).map((c) => (
                     <li key={c.id} className="font-normal hover:text-primary">
-                      <LocalizedClientLink href={`/collections/${c.handle}`}>
+                      <LocalizedClientLink
+                        href={`/store/collections/${c.handle}`}
+                      >
                         {c.title}
                       </LocalizedClientLink>
                     </li>

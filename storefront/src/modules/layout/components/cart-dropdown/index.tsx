@@ -64,7 +64,7 @@ const CartDropdown = ({
             <SheetClose>
               <button
                 data-testid="close-menu-button"
-                onClick={close}
+                onClick={() => setOpen(false)}
                 className="cursor-pointer"
               >
                 <X className="size-10 stroke-1" />

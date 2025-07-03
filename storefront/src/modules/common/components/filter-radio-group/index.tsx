@@ -1,5 +1,12 @@
 import { Label } from "components/ui/label"
 import { RadioGroup, RadioGroupItem } from "components/ui/radio-group"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "components/ui/select"
 
 type FilterRadioGroupProps = {
   title: string
@@ -20,20 +27,23 @@ const FilterRadioGroup = ({
   "data-testid": dataTestId,
 }: FilterRadioGroupProps) => {
   return (
-    <div className="flex gap-3">
-      <p className="txt-compact-small-plus text-ui-fg-muted">{title}</p>
-      <RadioGroup
+    <div className="flex items-center gap-3">
+      <Select
         value={value}
-        data-testid={dataTestId}
         onValueChange={handleChange}
+        data-testid={dataTestId}
       >
-        {items?.map((i) => (
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value={i.value} id={i.value} />
-            <Label htmlFor={i.value}>{i.label}</Label>
-          </div>
-        ))}
-      </RadioGroup>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder={title} />
+        </SelectTrigger>
+        <SelectContent>
+          {items?.map((i) => (
+            <SelectItem key={i.value} value={i.value}>
+              {i.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   )
 }
