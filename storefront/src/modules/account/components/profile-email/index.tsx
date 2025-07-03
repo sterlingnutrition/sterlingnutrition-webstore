@@ -3,7 +3,7 @@
 import React, { useEffect } from "react"
 import { useFormState } from "react-dom"
 
-import Input from "@modules/common/components/input"
+import { FloatingLabelInput as Input } from "components/ui/floating-input"
 
 import AccountInfo from "../account-info"
 import { HttpTypes } from "@medusajs/types"

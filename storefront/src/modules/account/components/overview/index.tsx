@@ -1,9 +1,20 @@
-import { Container } from "@medusajs/ui"
+"use client"
 
-import ChevronDown from "@modules/common/icons/chevron-down"
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "components/ui/card"
+import { Progress } from "components/ui/progress"
+import { Badge } from "components/ui/badge"
+import { Button } from "components/ui/button"
+import { ChevronRight } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
+import { User, MapPin, Package, Mail } from "lucide-react"
 
 type OverviewProps = {
   customer: HttpTypes.StoreCustomer | null
@@ -11,158 +22,146 @@ type OverviewProps = {
 }
 
 const Overview = ({ customer, orders }: OverviewProps) => {
+  const profileCompletion = getProfileCompletion(customer)
+  const addressesCount = customer?.addresses?.length || 0
+
   return (
-    <div data-testid="overview-page-wrapper">
-      <div className="hidden small:block">
-        <div className="text-xl-semi flex justify-between items-center mb-4">
-          <span data-testid="welcome-message" data-value={customer?.first_name}>
+    <div className="space-y-6" data-testid="overview-page-wrapper">
+      {/* Welcome Card */}
+      <div className="flex flex-row items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold">
             Hello {customer?.first_name}
-          </span>
-          <span className="text-small-regular text-ui-fg-base">
-            Signed in as:{" "}
-            <span
-              className="font-semibold"
-              data-testid="customer-email"
-              data-value={customer?.email}
-            >
-              {customer?.email}
-            </span>
-          </span>
+          </h2>
+          <p className="text-muted-foreground">Welcome back to your account</p>
         </div>
-        <div className="flex flex-col py-8 border-t border-gray-200">
-          <div className="flex flex-col gap-y-4 h-full col-span-1 row-span-2 flex-1">
-            <div className="flex items-start gap-x-16 mb-6">
-              <div className="flex flex-col gap-y-4">
-                <h3 className="text-large-semi">Profile</h3>
-                <div className="flex items-end gap-x-2">
-                  <span
-                    className="text-3xl-semi leading-none"
-                    data-testid="customer-profile-completion"
-                    data-value={getProfileCompletion(customer)}
-                  >
-                    {getProfileCompletion(customer)}%
-                  </span>
-                  <span className="uppercase text-base-regular text-ui-fg-subtle">
-                    Completed
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-y-4">
-                <h3 className="text-large-semi">Addresses</h3>
-                <div className="flex items-end gap-x-2">
-                  <span
-                    className="text-3xl-semi leading-none"
-                    data-testid="addresses-count"
-                    data-value={customer?.addresses?.length || 0}
-                  >
-                    {customer?.addresses?.length || 0}
-                  </span>
-                  <span className="uppercase text-base-regular text-ui-fg-subtle">
-                    Saved
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-y-4">
-              <div className="flex items-center gap-x-2">
-                <h3 className="text-large-semi">Recent orders</h3>
-              </div>
-              <ul
-                className="flex flex-col gap-y-4"
-                data-testid="orders-wrapper"
-              >
-                {orders && orders.length > 0 ? (
-                  orders.slice(0, 5).map((order) => {
-                    return (
-                      <li
-                        key={order.id}
-                        data-testid="order-wrapper"
-                        data-value={order.id}
-                      >
-                        <LocalizedClientLink
-                          href={`/account/orders/details/${order.id}`}
-                        >
-                          <Container className="bg-gray-50 flex justify-between items-center p-4">
-                            <div className="grid grid-cols-3 grid-rows-2 text-small-regular gap-x-4 flex-1">
-                              <span className="font-semibold">Date placed</span>
-                              <span className="font-semibold">
-                                Order number
-                              </span>
-                              <span className="font-semibold">
-                                Total amount
-                              </span>
-                              <span data-testid="order-created-date">
-                                {new Date(order.created_at).toDateString()}
-                              </span>
-                              <span
-                                data-testid="order-id"
-                                data-value={order.display_id}
-                              >
-                                #{order.display_id}
-                              </span>
-                              <span data-testid="order-amount">
-                                {convertToLocale({
-                                  amount: order.total,
-                                  currency_code: order.currency_code,
-                                })}
-                              </span>
-                            </div>
-                            <button
-                              className="flex items-center justify-between"
-                              data-testid="open-order-button"
-                            >
-                              <span className="sr-only">
-                                Go to order #{order.display_id}
-                              </span>
-                              <ChevronDown className="-rotate-90" />
-                            </button>
-                          </Container>
-                        </LocalizedClientLink>
-                      </li>
-                    )
-                  })
-                ) : (
-                  <span data-testid="no-orders-message">No recent orders</span>
-                )}
-              </ul>
-            </div>
-          </div>
-        </div>
+        <Badge variant="outline" className="flex items-center gap-2">
+          <Mail className="h-4 w-4" />
+          <span>{customer?.email}</span>
+        </Badge>
       </div>
+
+      {/* Stats Grid */}
+      <div className="grid gap-4 md:grid-cols-2">
+        {/* Profile Completion */}
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">
+              Profile Completion
+            </CardTitle>
+            <User className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{profileCompletion}%</div>
+            <Progress value={profileCompletion} className="h-2 mt-3" />
+          </CardContent>
+          <CardFooter>
+            <Button variant="link" className="p-0 h-auto" asChild>
+              <LocalizedClientLink href="/account/profile">
+                Complete your profile
+              </LocalizedClientLink>
+            </Button>
+          </CardFooter>
+        </Card>
+
+        {/* Saved Addresses */}
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">
+              Saved Addresses
+            </CardTitle>
+            <MapPin className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{addressesCount}</div>
+          </CardContent>
+          <CardFooter>
+            <Button variant="link" className="p-0 h-auto" asChild>
+              <LocalizedClientLink href="/account/addresses">
+                Manage addresses
+              </LocalizedClientLink>
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+
+      {/* Recent Orders */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Package className="h-5 w-5" />
+            <span>Recent Orders</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-0">
+          {orders && orders.length > 0 ? (
+            <div className="divide-y">
+              {orders.slice(0, 5).map((order) => (
+                <LocalizedClientLink
+                  key={order.id}
+                  href={`/account/orders/details/${order.id}`}
+                  className="block hover:bg-muted/50 transition-colors"
+                >
+                  <div className="p-4 flex items-center justify-between">
+                    <div className="grid grid-cols-3 gap-4 w-full">
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          Date placed
+                        </p>
+                        <p className="font-medium">
+                          {new Date(order.created_at).toDateString()}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          Order number
+                        </p>
+                        <p className="font-medium">#{order.display_id}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          Total amount
+                        </p>
+                        <p className="font-medium">
+                          {convertToLocale({
+                            amount: order.total,
+                            currency_code: order.currency_code,
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                </LocalizedClientLink>
+              ))}
+            </div>
+          ) : (
+            <div className="p-8 text-center">
+              <p className="text-muted-foreground mb-4">No recent orders</p>
+              <Button asChild>
+                <LocalizedClientLink href="/">
+                  Start shopping
+                </LocalizedClientLink>
+              </Button>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   )
 }
 
 const getProfileCompletion = (customer: HttpTypes.StoreCustomer | null) => {
-  let count = 0
+  if (!customer) return 0
 
-  if (!customer) {
-    return 0
-  }
+  const checks = [
+    customer.email,
+    customer.first_name && customer.last_name,
+    customer.phone,
+    customer.addresses?.some((addr) => addr.is_default_billing),
+  ]
 
-  if (customer.email) {
-    count++
-  }
-
-  if (customer.first_name && customer.last_name) {
-    count++
-  }
-
-  if (customer.phone) {
-    count++
-  }
-
-  const billingAddress = customer.addresses?.find(
-    (addr) => addr.is_default_billing
-  )
-
-  if (billingAddress) {
-    count++
-  }
-
-  return (count / 4) * 100
+  return Math.round((checks.filter(Boolean).length / checks.length) * 100)
 }
 
 export default Overview

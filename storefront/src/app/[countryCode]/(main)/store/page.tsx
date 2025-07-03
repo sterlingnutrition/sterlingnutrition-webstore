@@ -11,6 +11,8 @@ import RefinementList, {
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import { getCategoriesList } from "@lib/data/categories"
 import { getCollectionsList } from "@lib/data/collections"
+import CTA from "@modules/home/components/cta"
+import TrustSection from "@modules/home/components/trust-section/page"
 
 export const metadata: Metadata = {
   title: "All Products",
@@ -61,28 +63,32 @@ export default async function AllProductsPage({
     })) || []
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="all-products-container"
-    >
-      <RefinementList
-        collections={formattedCollections}
-        categories={formattedCategories}
-        countryCode={countryCode}
-      />
-      <div className="w-full">
-        <div className="mb-8 flex justify-between">
-          <h1 className=" text-subtitle font-elegant">All Products</h1>
-          <SortProducts />
+    <>
+      <div
+        className="flex flex-col small:flex-row small:items-start gap-10 small:gap-20 py-6 md:py-10 lg:py-16 content-container"
+        data-testid="all-products-container"
+      >
+        <RefinementList
+          collections={formattedCollections}
+          categories={formattedCategories}
+          countryCode={countryCode}
+        />
+        <div className="w-full">
+          <div className="mb-8 flex justify-between">
+            <h1 className="text-subtitle font-elegant">All Products</h1>
+            <SortProducts />
+          </div>
+          <Suspense fallback={<SkeletonProductGrid />}>
+            <PaginatedProducts
+              sortBy={sort}
+              page={pageNumber}
+              countryCode={params.countryCode}
+            />
+          </Suspense>
         </div>
-        <Suspense fallback={<SkeletonProductGrid />}>
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            countryCode={params.countryCode}
-          />
-        </Suspense>
       </div>
-    </div>
+      <CTA />
+      <TrustSection />
+    </>
   )
 }

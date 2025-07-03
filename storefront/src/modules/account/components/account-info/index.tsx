@@ -1,10 +1,12 @@
-import { Disclosure } from "@headlessui/react"
-import { Badge, clx } from "@medusajs/ui"
-import { useEffect } from "react"
+"use client"
 
-import useToggleState from "@lib/hooks/use-toggle-state"
+import { useState, useEffect } from "react"
 import { useFormStatus } from "react-dom"
 import { Button } from "components/ui/button"
+import { Card, CardHeader, CardContent, CardFooter } from "components/ui/card"
+import { Label } from "components/ui/label"
+import { Collapsible, CollapsibleContent } from "components/ui/collapsible"
+import { Alert, AlertDescription } from "components/ui/alert"
 
 type AccountInfoProps = {
   label: string
@@ -27,115 +29,84 @@ const AccountInfo = ({
   children,
   "data-testid": dataTestid,
 }: AccountInfoProps) => {
-  const { state, close, toggle } = useToggleState()
-
+  const [isOpen, setIsOpen] = useState(false)
   const { pending } = useFormStatus()
 
   const handleToggle = () => {
     clearState()
-    setTimeout(() => toggle(), 100)
+    setTimeout(() => setIsOpen(!isOpen), 100)
   }
 
   useEffect(() => {
     if (isSuccess) {
-      close()
+      setIsOpen(false)
     }
-  }, [isSuccess, close])
+  }, [isSuccess])
 
   return (
-    <div className="text-small-regular" data-testid={dataTestid}>
-      <div className="flex items-end justify-between">
-        <div className="flex flex-col">
-          <span className="uppercase text-ui-fg-base">{label}</span>
-          <div className="flex items-center flex-1 basis-0 justify-end gap-x-4">
-            {typeof currentInfo === "string" ? (
-              <span className="font-semibold" data-testid="current-info">
-                {currentInfo}
-              </span>
-            ) : (
-              currentInfo
-            )}
+    <Card className="w-full" data-testid={dataTestid}>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <div className="space-y-1">
+          <Label className="text-sm uppercase text-muted-foreground">
+            {label}
+          </Label>
+          <div className="text-sm font-medium" data-testid="current-info">
+            {typeof currentInfo === "string" ? currentInfo : currentInfo}
           </div>
         </div>
-        <div>
-          <Button
-            variant="secondary"
-            className="w-[100px] min-h-[25px] py-1"
-            onClick={handleToggle}
-            type={state ? "reset" : "button"}
-            data-testid="edit-button"
-            data-active={state}
-          >
-            {state ? "Cancel" : "Edit"}
-          </Button>
-        </div>
-      </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleToggle}
+          type="button"
+          data-testid="edit-button"
+          data-active={isOpen}
+        >
+          {isOpen ? "Cancel" : "Edit"}
+        </Button>
+      </CardHeader>
 
       {/* Success state */}
-      <Disclosure>
-        <Disclosure.Panel
-          static
-          className={clx(
-            "transition-[max-height,opacity] duration-300 ease-in-out overflow-hidden",
-            {
-              "max-h-[1000px] opacity-100": isSuccess,
-              "max-h-0 opacity-0": !isSuccess,
-            }
-          )}
-          data-testid="success-message"
-        >
-          <Badge className="p-2 my-4" color="green">
-            <span>{label} updated succesfully</span>
-          </Badge>
-        </Disclosure.Panel>
-      </Disclosure>
+      <Collapsible open={isSuccess}>
+        <CollapsibleContent className="overflow-hidden">
+          <Alert className="mx-4 mb-4" data-testid="success-message">
+            <AlertDescription>{label} updated successfully</AlertDescription>
+          </Alert>
+        </CollapsibleContent>
+      </Collapsible>
 
-      {/* Error state  */}
-      <Disclosure>
-        <Disclosure.Panel
-          static
-          className={clx(
-            "transition-[max-height,opacity] duration-300 ease-in-out overflow-hidden",
-            {
-              "max-h-[1000px] opacity-100": isError,
-              "max-h-0 opacity-0": !isError,
-            }
-          )}
-          data-testid="error-message"
-        >
-          <Badge className="p-2 my-4" color="red">
-            <span>{errorMessage}</span>
-          </Badge>
-        </Disclosure.Panel>
-      </Disclosure>
+      {/* Error state */}
+      <Collapsible open={isError}>
+        <CollapsibleContent className="overflow-hidden">
+          <Alert
+            variant="destructive"
+            className="mx-4 mb-4"
+            data-testid="error-message"
+          >
+            <AlertDescription>{errorMessage}</AlertDescription>
+          </Alert>
+        </CollapsibleContent>
+      </Collapsible>
 
-      <Disclosure>
-        <Disclosure.Panel
-          static
-          className={clx(
-            "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
-            {
-              "max-h-[1000px] opacity-100": state,
-              "max-h-0 opacity-0": !state,
-            }
-          )}
-        >
-          <div className="flex flex-col gap-y-2 py-4">
-            <div>{children}</div>
-            <div className="flex items-center justify-end mt-2">
-              <Button
-                loading={pending}
-                className="w-full small:max-w-[140px]"
-                type="submit"
-                data-testid="save-button"
-              >
-                Save changes
-              </Button>
-            </div>
-          </div>
-        </Disclosure.Panel>
-      </Disclosure>
-    </div>
+      {/* Edit form */}
+      <Collapsible open={isOpen}>
+        <CollapsibleContent className="overflow-hidden">
+          <CardContent className="p-4 pt-0">
+            <div className="space-y-4">{children}</div>
+          </CardContent>
+          <CardFooter className="flex justify-end p-4 pt-0">
+            <Button
+              loading={pending}
+              size="expanded"
+              type="submit"
+              data-testid="save-button"
+            >
+              Save changes
+            </Button>
+          </CardFooter>
+        </CollapsibleContent>
+      </Collapsible>
+    </Card>
   )
 }
 

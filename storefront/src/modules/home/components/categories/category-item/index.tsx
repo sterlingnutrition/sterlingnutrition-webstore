@@ -17,7 +17,7 @@ const CategoryItem = ({
   return (
     <div
       className={cn(
-        "w-full h-full p-4 group flex items-center aspect-video rounded-[50px] text-background relative",
+        "w-full h-full p-4 group min-h-72 flex items-center aspect-video rounded-[50px] text-background relative",
         bgColor
       )}
     >

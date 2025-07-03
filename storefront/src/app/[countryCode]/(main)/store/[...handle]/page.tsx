@@ -22,6 +22,8 @@ import SortProducts, {
 } from "@modules/store/components/refinement-list/sort-products"
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import CTA from "@modules/home/components/cta"
+import TrustSection from "@modules/home/components/trust-section/page"
 
 type Props = {
   params: {
@@ -205,29 +207,33 @@ export default async function StorePage({ params, searchParams }: Props) {
   }
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="store-container"
-    >
-      <RefinementList
-        collections={formattedCollections}
-        categories={formattedCategories}
-        countryCode={countryCode}
-      />
-      <div className="w-full">
-        <div className="flex flex-row mb-4 gap-4">
-          {parentLinks}
-          <h1 className="text-subtitle font-elegant mr-auto">{title}</h1>
-          <SortProducts />
-        </div>
-        {description && (
-          <div className="mb-8 text-body-sm">
-            <p>{description}</p>
+    <>
+      <div
+        className="flex flex-col small:flex-row small:items-start py-6 gap-10 small:gap-20 md:py-10 lg:py-16 content-container"
+        data-testid="store-container"
+      >
+        <RefinementList
+          collections={formattedCollections}
+          categories={formattedCategories}
+          countryCode={countryCode}
+        />
+        <div className="w-full">
+          <div className="flex flex-row mb-8 gap-4">
+            {parentLinks}
+            <h1 className="text-subtitle font-elegant mr-auto">{title}</h1>
+            <SortProducts />
           </div>
-        )}
-        {children}
-        <Suspense fallback={<SkeletonProductGrid />}>{content}</Suspense>
+          {description && (
+            <div className="mb-8 text-body-sm">
+              <p>{description}</p>
+            </div>
+          )}
+          {children}
+          <Suspense fallback={<SkeletonProductGrid />}>{content}</Suspense>
+        </div>
       </div>
-    </div>
+      <CTA />
+      <TrustSection />
+    </>
   )
 }

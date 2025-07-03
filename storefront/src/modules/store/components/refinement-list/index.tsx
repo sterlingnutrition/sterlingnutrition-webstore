@@ -1,9 +1,14 @@
 "use client"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useCallback } from "react"
-import { RadioGroup, RadioGroupItem } from "components/ui/radio-group"
+import * as RadioGroup from "@radix-ui/react-radio-group"
 import { Label } from "components/ui/label"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "components/ui/accordion"
 
 export type FilterItem = {
   value: string
@@ -68,59 +73,81 @@ export default function RefinementList({
     currentType === "all" ? "all" : `${currentType}---${currentValue}`
 
   return (
-    <div className="flex small:flex-col gap-12 py-4 mb-8 small:px-0 pl-6 small:min-w-[250px] small:ml-[1.675rem]">
-      <div className="space-y-6">
-        <RadioGroup value={radioValue} onValueChange={handleValueChange}>
-          <div className="space-y-2">
-            <Label className="text-sm font-medium">Filter By</Label>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="all" id="all" />
-              <Label htmlFor="all">All Products</Label>
-            </div>
+    <div className="small:sticky small:top-[10vh] flex small:flex-col gap-12 py-4 mb-8 small:px-0 small:min-w-[300px]">
+      <div className="space-y-6 text-muted-foreground w-full">
+        <Label className="uppercase text-body font-bold tracking-wider">
+          Filters
+        </Label>
+        <RadioGroup.Root
+          defaultValue="all"
+          value={radioValue}
+          onValueChange={handleValueChange}
+          className="w-full"
+        >
+          <RadioGroup.Item
+            value="all"
+            id="all"
+            className="text-muted-foreground data-[state=checked]:text-primary/90 data-[state=checked]:font-semibold cursor-pointer"
+          >
+            All Products
+          </RadioGroup.Item>
+          <Accordion
+            type="multiple"
+            defaultValue={["collections", "categories"]}
+            className="w-full flex-1"
+          >
             {collections.length > 0 && (
-              <>
-                <p className="text-xs font-medium text-gray-500 mt-4 mb-2">
+              <AccordionItem
+                key="collections"
+                value={`collections`}
+                className="w-full"
+              >
+                <AccordionTrigger className="w-full uppercase text-body-sm font-bold tracking-wider">
                   Collections
-                </p>
-                {collections.map((collection) => (
-                  <div
-                    key={`collections-${collection.value}`}
-                    className="flex items-center space-x-2"
-                  >
-                    <RadioGroupItem
-                      value={`collections---${collection.value}`}
-                      id={`collections---${collection.value}`}
-                    />
-                    <Label htmlFor={`collections---${collection.value}`}>
-                      {collection.label}
-                    </Label>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="flex flex-col items-start gap-2">
+                    {collections.map((collection) => (
+                      <RadioGroup.Item
+                        key={`collections---${collection.value}`}
+                        value={`collections---${collection.value}`}
+                        id={`collections---${collection.value}`}
+                        className="text-muted-foreground data-[state=checked]:text-primary/90 data-[state=checked]:font-semibold cursor-pointer"
+                      >
+                        {collection.label}
+                      </RadioGroup.Item>
+                    ))}
                   </div>
-                ))}
-              </>
+                </AccordionContent>
+              </AccordionItem>
             )}
             {categories.length > 0 && (
-              <>
-                <p className="text-xs font-medium text-gray-500 mt-4 mb-2">
+              <AccordionItem
+                key="categories"
+                value={`categories`}
+                className="w-full"
+              >
+                <AccordionTrigger className="w-full uppercase text-body-sm font-bold tracking-wider">
                   Categories
-                </p>
-                {categories.map((category) => (
-                  <div
-                    key={`categories---${category.value}`}
-                    className="flex items-center space-x-2"
-                  >
-                    <RadioGroupItem
-                      value={`categories---${category.value}`}
-                      id={`categories-${category.value}`}
-                    />
-                    <Label htmlFor={`categories---${category.value}`}>
-                      {category.label}
-                    </Label>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="flex flex-col items-start gap-2">
+                    {categories.map((category) => (
+                      <RadioGroup.Item
+                        key={`categories---${category.value}`}
+                        value={`categories---${category.value}`}
+                        id={`categories---${category.value}`}
+                        className="text-muted-foreground data-[state=checked]:text-primary/90 data-[state=checked]:font-semibold cursor-pointer"
+                      >
+                        {category.label}
+                      </RadioGroup.Item>
+                    ))}
                   </div>
-                ))}
-              </>
+                </AccordionContent>
+              </AccordionItem>
             )}
-          </div>
-        </RadioGroup>
+          </Accordion>
+        </RadioGroup.Root>
       </div>
     </div>
   )

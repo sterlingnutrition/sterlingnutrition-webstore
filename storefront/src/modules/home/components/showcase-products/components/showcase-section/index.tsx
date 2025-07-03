@@ -1,9 +1,11 @@
+"use client"
 import React from "react"
-import { ShowcaseProduct } from "../.."
 import { cn } from "@lib/utils"
 import Image from "next/image"
 import { Button } from "components/ui/button"
 import TextReveal from "components/ui/text-reveal"
+import { motion, useScroll, useTransform } from "motion/react"
+import { ShowcaseProduct } from "../.."
 
 const ShowcaseSection = ({
   id,
@@ -13,8 +15,21 @@ const ShowcaseSection = ({
   url,
   image,
 }: ShowcaseProduct) => {
+  // Create a ref for the container
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
+  // Use the useScroll hook to track scroll progress within this container
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  })
+
+  // Transform the scroll progress into a vertical movement range
+  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"])
+
   return (
     <div
+      ref={containerRef}
       className={cn(
         "flex flex-col min-h-screen",
         id % 2 === 0 ? "lg:flex-row-reverse" : "lg:flex-row"
@@ -45,8 +60,13 @@ const ShowcaseSection = ({
           </Button>
         </div>
       </div>
-      <div className="relative w-full lg:w-1/2 aspect-square lg:aspect-auto">
-        <Image fill src={image} alt={name} style={{ objectFit: "cover" }} />
+      <div className="w-full lg:w-1/2 overflow-hidden relative">
+        <motion.div
+          className="relative w-full h-full aspect-square lg:aspect-auto"
+          style={{ y }} // Apply the parallax effect here
+        >
+          <Image fill src={image} alt={name} style={{ objectFit: "cover" }} />
+        </motion.div>
       </div>
     </div>
   )

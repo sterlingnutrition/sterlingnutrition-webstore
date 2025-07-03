@@ -4,8 +4,8 @@ import Image from "next/image"
 
 const Hero = () => {
   return (
-    <div className="relative w-full min-h-[100svh] border-b bg-gradient-to-tr from-slate-950 to-slate-800 text-background border-ui-border-base">
-      <div className="absolute inset-0 z-10 flex flex-col items-center gap-6 px-4 pt-16 text-center font-elegant small:p-32">
+    <div className="relative w-full flex flex-col  border-b bg-gradient-to-tr from-slate-950 to-slate-800 text-background border-ui-border-base">
+      <div className="z-10 flex flex-col items-center gap-6 px-4 py-16 text-center font-elegant small:pt-24">
         <TextReveal>
           <h1 className="mb-4 text-body">
             Holistic Wellness • Authentic Products • Trusted in Singapore
@@ -30,7 +30,7 @@ const Hero = () => {
           width={1920}
         />
       </div>
-      <div className="absolute bottom-0 flex justify-center w-full lg:-bottom-15">
+      <div className=" flex justify-center w-full z-[1]  mt-auto">
         <Image
           src="/hero-products.webp"
           alt="Hero Background"

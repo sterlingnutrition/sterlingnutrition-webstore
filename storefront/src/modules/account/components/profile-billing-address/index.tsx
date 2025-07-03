@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo } from "react"
 
-import Input from "@modules/common/components/input"
+import { FloatingLabelInput as Input } from "components/ui/floating-input"
 import NativeSelect from "@modules/common/components/native-select"
 
 import AccountInfo from "../account-info"
