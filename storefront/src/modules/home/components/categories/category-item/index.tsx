@@ -1,4 +1,5 @@
 import { cn } from "@lib/utils"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Button } from "components/ui/button"
 import Image from "next/image"
 import React from "react"
@@ -28,12 +29,14 @@ const CategoryItem = ({
           </h1>
           <div className="w-full group-hover:via-transparent h-[1px] bg-gradient-to-r from-background to-transparent" />
         </div>
-        <Button
-          className="!p-4 md:!p-6 mt-4 uppercase md:mt-6 md:opacity-0 md:-translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 border-background"
-          variant="hollow"
-        >
-          Shop Now
-        </Button>
+        <LocalizedClientLink href={`/store/categories/${handle}`}>
+          <Button
+            className="!p-4 md:!p-6 mt-4 uppercase md:mt-6 md:opacity-0 md:-translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 border-background"
+            variant="hollow"
+          >
+            Shop Now
+          </Button>
+        </LocalizedClientLink>
       </div>
       <div className="relative w-full h-full">
         <Image

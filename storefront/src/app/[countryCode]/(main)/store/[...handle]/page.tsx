@@ -11,7 +11,11 @@ import {
   getCollectionsList,
 } from "@lib/data/collections"
 import { listRegions } from "@lib/data/regions"
-import { StoreCollection, StoreRegion } from "@medusajs/types"
+import {
+  StoreCollection,
+  StoreProductCategory,
+  StoreRegion,
+} from "@medusajs/types"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import InteractiveLink from "@modules/common/components/interactive-link"
 import RefinementList, {
@@ -24,6 +28,7 @@ import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CTA from "@modules/home/components/cta"
 import TrustSection from "@modules/home/components/trust-section/page"
+import { Metadata } from "next"
 
 type Props = {
   params: {
@@ -67,6 +72,49 @@ export async function generateStaticParams() {
   ])
 
   return staticParams
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const isCollection = params.handle[0] === "collections"
+
+  if (isCollection && params.handle.length === 2) {
+    const collection = await getCollectionByHandle(params.handle[1])
+
+    if (!collection) {
+      notFound()
+    }
+
+    return {
+      title: `${collection.title} | Sterling Nutrition`,
+      description: `${collection.title} collection`,
+      alternates: {
+        canonical: `collections/${params.handle[1]}`,
+      },
+    }
+  } else {
+    // Handle category metadata
+    const { product_categories } = await getCategoryByHandle(params.handle)
+
+    if (!product_categories || product_categories.length === 0) {
+      notFound()
+    }
+
+    const title = product_categories
+      .map((category: StoreProductCategory) => category.name)
+      .join(" | ")
+
+    const description =
+      product_categories[product_categories.length - 1].description ??
+      `${title} category.`
+
+    return {
+      title: `${title} | Sterling Nutrition`,
+      description,
+      alternates: {
+        canonical: params.handle.join("/"),
+      },
+    }
+  }
 }
 
 export default async function StorePage({ params, searchParams }: Props) {

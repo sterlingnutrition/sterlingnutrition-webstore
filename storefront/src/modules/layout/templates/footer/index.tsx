@@ -2,7 +2,9 @@ import { getCategoriesList } from "@lib/data/categories"
 import { getCollectionsList } from "@lib/data/collections"
 import Image from "next/image"
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import LocalizedClientLink, {
+  LocalizedClientLinkButton,
+} from "@modules/common/components/localized-client-link"
 import { clx } from "@medusajs/ui"
 
 interface FooterProps {
@@ -106,22 +108,22 @@ export default async function Footer({
                         key={c.id}
                         className=" text-body-sm hover:text-primary"
                       >
-                        <LocalizedClientLink
+                        <LocalizedClientLinkButton
                           href={`/store/categories/${c.handle}`}
                           className={clx("hover:text-ui-fg-base font-normal")}
                         >
                           {c.name}
-                        </LocalizedClientLink>
+                        </LocalizedClientLinkButton>
                         {children && (
                           <ul className="mt-2 ml-3 space-y-2">
                             {children.map((child) => (
                               <li key={child.id}>
-                                <LocalizedClientLink
+                                <LocalizedClientLinkButton
                                   className="hover:text-ui-fg-base"
                                   href={`/store/categories/${child.handle}`}
                                 >
                                   {child.name}
-                                </LocalizedClientLink>
+                                </LocalizedClientLinkButton>
                               </li>
                             ))}
                           </ul>
@@ -139,11 +141,11 @@ export default async function Footer({
                 <ul className="space-y-3 text-body-sm text-foreground">
                   {collections?.slice(0, 6).map((c) => (
                     <li key={c.id} className="font-normal hover:text-primary">
-                      <LocalizedClientLink
+                      <LocalizedClientLinkButton
                         href={`/store/collections/${c.handle}`}
                       >
                         {c.title}
-                      </LocalizedClientLink>
+                      </LocalizedClientLinkButton>
                     </li>
                   ))}
                 </ul>
@@ -154,19 +156,19 @@ export default async function Footer({
               <h3 className="mb-4 font-semibold text-body-sm">Company</h3>
               <ul className="space-y-3 text-body-sm text-foreground">
                 <li className="font-normal hover:text-primary">
-                  <LocalizedClientLink href="/about">
+                  <LocalizedClientLinkButton href="/about">
                     Our Story
-                  </LocalizedClientLink>
+                  </LocalizedClientLinkButton>
                 </li>
                 <li className="font-normal hover:text-primary">
-                  <LocalizedClientLink href="/about">
+                  <LocalizedClientLinkButton href="/about">
                     Why Sterling
-                  </LocalizedClientLink>
+                  </LocalizedClientLinkButton>
                 </li>
                 <li className="font-normal hover:text-primary">
-                  <LocalizedClientLink href="/contact">
+                  <LocalizedClientLinkButton href="/contact">
                     Contact Us
-                  </LocalizedClientLink>
+                  </LocalizedClientLinkButton>
                 </li>
               </ul>
             </div>
@@ -179,8 +181,10 @@ export default async function Footer({
           </p>
           <ul className="flex order-1 gap-2 md:gap-4 md:order-2 ">
             {legalLinks.map((link, idx) => (
-              <li key={idx} className="hover:text-primary">
-                <a href={link.href}> {link.name}</a>
+              <li key={idx}>
+                <LocalizedClientLinkButton href={link.href}>
+                  {link.name}
+                </LocalizedClientLinkButton>
               </li>
             ))}
           </ul>

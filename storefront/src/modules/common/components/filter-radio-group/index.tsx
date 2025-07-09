@@ -33,7 +33,7 @@ const FilterRadioGroup = ({
         onValueChange={handleChange}
         data-testid={dataTestId}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[180px] border-x-0 border-t-0 border-foreground/80 shadow-none rounded-none">
           <SelectValue placeholder={title} />
         </SelectTrigger>
         <SelectContent>

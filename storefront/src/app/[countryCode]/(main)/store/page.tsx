@@ -15,8 +15,9 @@ import CTA from "@modules/home/components/cta"
 import TrustSection from "@modules/home/components/trust-section/page"
 
 export const metadata: Metadata = {
-  title: "All Products",
-  description: "Browse all of our products.",
+  title: "All Products | Sterling Nutrition",
+  description:
+    "Explore our wide range of health supplements, including Goli, Immuneti, and Hab Shifa. Shop now for the best health products in Singapore!",
 }
 
 type Params = {

@@ -13,31 +13,31 @@ import CategoryItem from "./category-item"
 
 const CATEGORIES = [
   {
-    name: "Beard Oil",
+    name: "Sterling",
     handle: "sterling",
     image: "/categories/beard-oil.webp",
     bgColor: "bg-gradient-to-l from-slate-950 to-slate-800",
   },
   {
-    name: "Beard Butter",
+    name: "Haila Wellness",
     handle: "sterling",
     image: "/categories/beard-butter.webp",
     bgColor: "bg-gradient-to-l from-yellow-950 to-yellow-800",
   },
   {
-    name: "Face Oil",
+    name: "Colla White",
     handle: "sterling",
     image: "/categories/face-oil.webp",
     bgColor: "bg-gradient-to-l from-slate-950 to-slate-800",
   },
   {
-    name: "Lip Balm",
+    name: "Electrolytes",
     handle: "sterling",
     image: "/categories/lip-balm-earl-grey.webp",
     bgColor: "bg-gradient-to-l from-yellow-950 to-yellow-800",
   },
   {
-    name: "Soap Bar",
+    name: "Apple Cider Vinegar",
     handle: "sterling",
     image: "/categories/soap-bar-mud-men.webp",
     bgColor: "bg-gradient-to-l from-amber-950 to-amber-800",

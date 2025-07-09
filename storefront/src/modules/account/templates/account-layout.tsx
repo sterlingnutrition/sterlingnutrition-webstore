@@ -4,6 +4,7 @@ import AccountNav from "../components/account-nav"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Button } from "components/ui/button"
+import { cn } from "@lib/utils"
 
 interface AccountLayoutProps {
   customer: HttpTypes.StoreCustomer | null
@@ -28,9 +29,18 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
         />
       </div>
       <div className="flex-1 content-container h-full lg:max-w-5xl mx-auto bg-white lg:rounded-xl lg:shadow-xl flex flex-col">
-        <div className="grid grid-cols-1 small:grid-cols-[240px_1fr] py-12 gap-6">
-          <div>{customer && <AccountNav customer={customer} />}</div>
-          <div className="flex-1">{children}</div>
+        <div
+          className={cn(
+            "grid grid-cols-1 py-12 gap-6",
+            customer && "small:grid-cols-[240px_1fr]"
+          )}
+        >
+          {customer && (
+            <div>
+              <AccountNav customer={customer} />
+            </div>
+          )}
+          <div className="flex-1 ">{children}</div>
         </div>
         <div className="flex flex-col small:flex-row lg:items-end items-center text-center lg:text-start justify-between small:border-t border-gray-200 py-12 gap-8">
           <div>
