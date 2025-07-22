@@ -6,6 +6,7 @@ import { Button } from "components/ui/button"
 import TextReveal from "components/ui/text-reveal"
 import { motion, useScroll, useTransform } from "motion/react"
 import { ShowcaseProduct } from "../.."
+import { useMedia } from "react-use"
 
 const ShowcaseSection = ({
   id,
@@ -24,18 +25,23 @@ const ShowcaseSection = ({
     offset: ["start end", "end start"],
   })
 
-  // Transform the scroll progress into a vertical movement range
-  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"])
+  const isMobile = useMedia("(max-width: 769px)")
+
+  // Always call useTransform unconditionally
+  const yTransform = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"])
+
+  // Then conditionally apply the transform
+  const y = !isMobile ? yTransform : undefined
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "flex flex-col min-h-screen",
+        "flex flex-col lg:min-h-screen",
         id % 2 === 0 ? "lg:flex-row-reverse" : "lg:flex-row"
       )}
     >
-      <div className="flex flex-col justify-center w-full p-10 lg:px-16 text-background bg-gradient-to-tr from-slate-950 to-slate-800 lg:w-1/2 min-h-96">
+      <div className="flex flex-col justify-center w-full p-10 lg:px-16 text-background bg-gradient-to-tr from-green-950 to-green-800 lg:w-1/2 min-h-96">
         <TextReveal>
           <h2 className="mb-2 italic md:mb-4 text-subtitle-sm font-elegant !text-background">
             {name}
@@ -60,10 +66,10 @@ const ShowcaseSection = ({
           </Button>
         </div>
       </div>
-      <div className="w-full lg:w-1/2 overflow-hidden relative">
+      <div className="w-full lg:w-1/2  overflow-hidden relative">
         <motion.div
           className="relative w-full h-full aspect-square lg:aspect-auto"
-          style={{ y }} // Apply the parallax effect here
+          style={y ? { y } : {}}
         >
           <Image fill src={image} alt={name} style={{ objectFit: "cover" }} />
         </motion.div>

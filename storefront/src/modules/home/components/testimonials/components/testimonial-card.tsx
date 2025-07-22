@@ -12,8 +12,8 @@ const TestimonialCard = ({ title, description, name }: Testimonial) => {
     <div className="flex flex-col items-center w-full text-center text-background">
       {/* Quote icon at top */}
       <div className="flex items-center gap-2">
-        <Quote className="w-8 h-8 mb-4 rotate-180" />
-        <Quote className="w-8 h-8 mb-4 " />
+        <Quote className="size-5 md:size-8 mb-4 rotate-180" />
+        <Quote className="size-5 md:size-8 mb-4 " />
       </div>
 
       {/* Testimonial content */}

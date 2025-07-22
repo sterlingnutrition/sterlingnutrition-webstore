@@ -80,11 +80,11 @@ export default async function RelatedProducts({
 
         <div className="flex items-center justify-center gap-4 py-4 pt-10">
           <SliderPrevButton className="p-2 rounded-full left-4 bg-white/25 dark:-black/25 dark:border-white backdrop-blur-sm text-primary disabled:opacity-20">
-            <ChevronLeft className="w-8 h-8" />
+            <ChevronLeft className="size-5 md:size-8" />
           </SliderPrevButton>
           <SliderDotButton />
           <SliderNextButton className="p-2 rounded-full top-[50%] bg-white/25 dark:bg-black/25 dark:border-white backdrop-blur-sm text-primary disabled:opacity-20">
-            <ChevronRight className="w-8 h-8" />
+            <ChevronRight className="size-5 md:size-8" />
           </SliderNextButton>
         </div>
       </Carousel>

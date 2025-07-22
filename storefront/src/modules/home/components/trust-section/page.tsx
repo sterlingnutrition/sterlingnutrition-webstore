@@ -35,12 +35,12 @@ const TrustSection = () => {
               className="bg-gradient-to-t from-transparent via-muted-foreground to-transparent"
             />
             <div className="w-full">
-              <h1 className="p-6 font-light md:p-10 2xl:py-16 text-subtitle-sm font-elegant">
+              <h1 className="p-6 md:p-10 2xl:py-16 text-subtitle-sm font-medium font-elegant">
                 {item.title}
               </h1>
               <Separator className="bg-gradient-to-r from-transparent via-muted-foreground to-transparent" />
               <TextReveal>
-                <p className="flex-1 h-full p-6 md:p-10 text-body-sm text-muted-foreground">
+                <p className="flex-1 h-full p-6 md:p-10 text-body-sm">
                   {item.content}
                 </p>
               </TextReveal>

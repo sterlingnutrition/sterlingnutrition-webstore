@@ -18,13 +18,13 @@ const CategoryItem = ({
   return (
     <div
       className={cn(
-        "w-full h-full p-4 group min-h-72 flex items-center aspect-video rounded-[50px] text-background relative",
+        "w-full h-full p-4 group flex items-center aspect-video rounded-[50px] text-background relative",
         bgColor
       )}
     >
       <div className="w-full px-4 ">
         <div className="transition-all duration-500 ease-in-out md:translate-y-1/2 md:group-hover:translate-y-0">
-          <h1 className="w-full text-subtitle font-elegant !text-background">
+          <h1 className="w-full text-xl tracking-tight md:text-3xl lg:text-5xl 3xl:text-6xl font-elegant !text-background">
             {name}
           </h1>
           <div className="w-full group-hover:via-transparent h-[1px] bg-gradient-to-r from-background to-transparent" />

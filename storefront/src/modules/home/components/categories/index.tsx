@@ -16,7 +16,7 @@ const CATEGORIES = [
     name: "Sterling",
     handle: "sterling",
     image: "/categories/beard-oil.webp",
-    bgColor: "bg-gradient-to-l from-slate-950 to-slate-800",
+    bgColor: "bg-gradient-to-l from-green-950 to-green-800",
   },
   {
     name: "Haila Wellness",
@@ -28,7 +28,7 @@ const CATEGORIES = [
     name: "Colla White",
     handle: "sterling",
     image: "/categories/face-oil.webp",
-    bgColor: "bg-gradient-to-l from-slate-950 to-slate-800",
+    bgColor: "bg-gradient-to-l from-green-950 to-green-800",
   },
   {
     name: "Electrolytes",
@@ -48,7 +48,7 @@ const Categories = async () => {
   //   const { product_categories } = await getCategoriesList(0, 6)
 
   return (
-    <div className="px-4 py-16 mx-auto sm:px-10 ">
+    <div className="px-4 py-10 sm:py-16 mx-auto sm:px-10 ">
       <Carousel options={{ align: "start" }} activeSlider>
         <SliderContainer className="gap-4">
           {CATEGORIES.map((category, index) => (
@@ -63,11 +63,11 @@ const Categories = async () => {
 
         <div className="flex items-center justify-center gap-4 py-4 pt-10">
           <SliderPrevButton className="p-2 rounded-full left-4 bg-white/25 dark:-black/25 dark:border-white backdrop-blur-sm text-primary disabled:opacity-20">
-            <ChevronLeft className="w-8 h-8 stroke-[1.5]" />
+            <ChevronLeft className="size-5 md:size-8 stroke-[1.5]" />
           </SliderPrevButton>
           <SliderDotButton />
           <SliderNextButton className="p-2 rounded-full top-[50%] bg-white/25 dark:bg-black/25 dark:border-white backdrop-blur-sm text-primary disabled:opacity-20">
-            <ChevronRight className="w-8 h-8 stroke-[1.5]" />
+            <ChevronRight className="size-5 md:size-8 stroke-[1.5]" />
           </SliderNextButton>
         </div>
       </Carousel>

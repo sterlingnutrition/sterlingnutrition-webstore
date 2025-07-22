@@ -427,9 +427,9 @@ export const SliderDotButton = ({
             type="button"
             key={index}
             onClick={() => onDotButtonClick(index)}
-            className={`relative inline-flex  p-0 m-0 w-10 h-2 `}
+            className={`relative inline-flex  p-0 m-0 w-8 sm:w-10 h-2 `}
           >
-            <div className="w-10 h-1 rounded-full bg-gray-500/40"></div>
+            <div className="w-8 sm:w-10 h-1 rounded-full bg-gray-500/40"></div>
             {index === selectedIndex && (
               <AnimatePresence mode="wait">
                 <motion.div

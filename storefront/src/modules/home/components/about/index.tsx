@@ -20,14 +20,16 @@ const FeatureCard = ({
   disableParallax?: boolean
 }) => (
   <motion.div
-    className="w-full aspect-[12/16] max-w-xs p-6 flex justify-center items-center flex-col bg-muted lg:rounded-lg space-y-4 lg:space-y-10 lg:shadow-xl"
+    className="w-full aspect-[12/16] h-full max-w-xs bg-gradient-to-tr text-white from-green-950 to-green-800 p-6 flex justify-center items-center flex-col bg-muted lg:rounded-lg gap-4 lg:gap-10 lg:shadow-xl"
     style={disableParallax ? {} : { y }}
   >
     <div className="aspect-square w-full max-w-[7rem]  mx-auto rounded-full flex justify-center items-center bg-white">
-      <Icon className="size-8  stroke-1" />
+      <Icon className="size-8 text-foreground stroke-1" />
     </div>
 
-    <h3 className=" text-center text-xl font-medium">{title}</h3>
+    <h3 className=" text-center text-base sm:text-lg md:text-xl font-medium">
+      {title}
+    </h3>
     <p className="hidden lg:block text-body-sm text-center">{content}</p>
   </motion.div>
 )
@@ -177,7 +179,7 @@ const About = () => {
         </div>
 
         {/* Grid cards - no parallax */}
-        <div className="grid grid-cols-2 divide-2 mt-10 w-full content-container">
+        <div className="grid grid-cols-2 mt-10 w-full ">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} disableParallax />
           ))}

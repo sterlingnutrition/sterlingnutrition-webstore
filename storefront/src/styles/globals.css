@@ -46,7 +46,7 @@
   }
 
   .text-body-sm {
-    @apply text-sm md:text-base;
+    @apply text-xs sm:text-sm md:text-base;
   }
 }
 

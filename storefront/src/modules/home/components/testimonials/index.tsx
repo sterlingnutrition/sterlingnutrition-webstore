@@ -57,7 +57,7 @@ const Testimonials = () => {
           <SquareDot className="ml-2 size-4" />
         </h2>
       </div>
-      <div className="px-4 py-16 mx-auto sm:px-10 bg-gradient-to-tr from-slate-950 to-slate-800">
+      <div className="px-4 py-16 mx-auto sm:px-10 bg-gradient-to-tr from-green-950 to-green-800">
         <Carousel
           options={{ align: "start", loop: true }}
           activeSlider
@@ -73,11 +73,11 @@ const Testimonials = () => {
 
           <div className="flex items-center justify-center gap-4 py-4 pt-10">
             <SliderPrevButton className="p-2 rounded-full left-4 backdrop-blur-sm text-muted-foreground disabled:opacity-20">
-              <ChevronLeft className="w-8 h-8" />
+              <ChevronLeft className="text-body-playfair md:size-8" />
             </SliderPrevButton>
             <SliderDotButton activeclass="bg-muted" />
             <SliderNextButton className="p-2 rounded-full top-[50%]   backdrop-blur-sm text-muted-foreground disabled:opacity-20">
-              <ChevronRight className="w-8 h-8" />
+              <ChevronRight className="size-5 md:size-8" />
             </SliderNextButton>
           </div>
         </Carousel>
