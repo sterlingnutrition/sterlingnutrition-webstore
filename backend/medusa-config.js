@@ -79,6 +79,35 @@ const medusaConfig = {
         ],
       },
     },
+    ...(PAYHERE_MERCHANT_ID && PAYHERE_SECRET_KEY
+      ? [
+          {
+            key: Modules.PAYMENT,
+            resolve: "@medusajs/payment",
+            options: {
+              providers: [
+                ...(PAYHERE_MERCHANT_ID && PAYHERE_SECRET_KEY
+                  ? [
+                      {
+                        resolve: "./src/modules/payhere",
+                        id: "payhere",
+                        options: {
+                          merchant_id: PAYHERE_MERCHANT_ID,
+                          merchant_secret: PAYHERE_SECRET_KEY,
+                          sandbox: true, // Set to false for production
+                          notify_url: "https://your-store.com/payhere/webhook",
+                          return_url:
+                            "https://your-store.com/order-confirmation",
+                          cancel_url: "https://your-store.com/checkout",
+                        },
+                      },
+                    ]
+                  : []),
+              ],
+            },
+          },
+        ]
+      : []),
     ...(REDIS_URL
       ? [
           {
