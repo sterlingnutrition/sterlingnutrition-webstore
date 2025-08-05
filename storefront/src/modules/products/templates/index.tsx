@@ -80,7 +80,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           <ProductTabs product={product} />
         </div>
       </div>
-      <FAQ />
+      {/* <FAQ /> */}
       <div data-testid="related-products-container">
         <Suspense fallback={<SkeletonRelatedProducts />}>
           <RelatedProducts product={product} countryCode={countryCode} />

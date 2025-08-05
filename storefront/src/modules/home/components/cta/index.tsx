@@ -1,4 +1,4 @@
-import { Button } from "components/ui/button"
+import Button from "components/ui/ui-button"
 import TextReveal from "components/ui/text-reveal"
 import Image from "next/image"
 import React from "react"
@@ -19,9 +19,7 @@ const CTA = () => {
             {`Discover the power of natural supplements. Join us in embracing holistic health with our premium range of products.`}
           </p>
         </TextReveal>
-        <Button variant="hollow" className="uppercase">
-          Shop Now
-        </Button>
+        <Button className="text-primary">Shop Now</Button>
       </div>
 
       {/* Product Image - Right-aligned on larger screens */}

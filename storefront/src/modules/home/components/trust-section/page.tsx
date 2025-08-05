@@ -1,33 +1,40 @@
 import { Separator } from "components/ui/separator"
 import TextReveal from "components/ui/text-reveal"
+import { DollarSign, Gift, Truck, Users } from "lucide-react"
 import React from "react"
 
 const TRUST_ITEMS = [
   {
-    title: "COD & Contactless Delivery",
-    content:
-      "Enjoy the convenience of cash on delivery and contactless delivery options. We ensure a safe and secure shopping experience, so you can focus on what matters most.",
+    title: "fast delivery",
+    content: "West & East coast dispatch",
     key: "delivery",
+    icon: Truck,
   },
   {
-    title: "Secured Online Payment",
-    content:
-      "Shop with confidence! Our website is secured with the latest encryption technology, ensuring your personal and payment information is safe and protected at all times.",
+    title: "free gift with order $150+",
+    content: "Multiple gift options available",
     key: "payment",
+    icon: Gift,
   },
   {
-    title: "100% Authentic Products",
-    content:
-      "We guarantee that all our products are 100% authentic and sourced directly from trusted manufacturers. Your health and safety are our top priorities, so you can shop with peace of mind.",
+    title: "click & collect",
+    content: "Check your local stores now",
     key: "authenticity",
+    icon: DollarSign,
+  },
+  {
+    title: "2m+ happy customers",
+    content: "Here to support your journey",
+    key: "customers",
+    icon: Users,
   },
 ]
 
 const TrustSection = () => {
   return (
-    <div className=" md:py-16 lg:py-32">
+    <div className="section-container md:!pt-20">
       <Separator className="hidden md:block bg-gradient-to-r from-transparent via-muted-foreground to-transparent" />
-      <div className="grid grid-cols-1 content-container md:grid-cols-3">
+      <div className="grid grid-cols-2 content-container md:grid-cols-4">
         {TRUST_ITEMS.map((item) => (
           <div key={item.key} className="flex min-h-48 md:min-h-80">
             <Separator
@@ -35,15 +42,19 @@ const TrustSection = () => {
               className="bg-gradient-to-t from-transparent via-muted-foreground to-transparent"
             />
             <div className="w-full">
-              <h1 className="p-6 md:p-10 2xl:py-16 text-subtitle-sm font-medium font-elegant">
-                {item.title}
-              </h1>
+              <div className="flex justify-center items-center py-10">
+                <item.icon className="size-12 lg:size-16 text-primary stroke-[1.5]" />
+              </div>
+
               <Separator className="bg-gradient-to-r from-transparent via-muted-foreground to-transparent" />
-              <TextReveal>
-                <p className="flex-1 h-full p-6 md:p-10 text-body-sm">
-                  {item.content}
-                </p>
-              </TextReveal>
+              <div className="p-6 lg:px-10 ">
+                <TextReveal>
+                  <h1 className=" text-body-playfair mb-4 uppercase font-bold font-elegant">
+                    {item.title}
+                  </h1>
+                  <p className="flex-1 h-full text-body-sm">{item.content}</p>
+                </TextReveal>
+              </div>
             </div>
             <Separator
               orientation="vertical"

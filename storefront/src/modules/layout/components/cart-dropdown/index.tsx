@@ -8,7 +8,7 @@ import LocalizedClientLink, {
   LocalizedClientLinkButton,
 } from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
-import { ShoppingCart, X } from "lucide-react"
+import { ShoppingBag, ShoppingCart, X } from "lucide-react"
 import {
   Sheet,
   SheetClose,
@@ -43,11 +43,15 @@ const CartDropdown = ({
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <button
-          className="flex gap-1 cursor-pointer"
+          className="flex gap-1 relative cursor-pointer bg-cm-primary size-10 rounded-full justify-center items-center"
           data-testid="nav-cart-link"
         >
-          <ShoppingCart className="stroke-[1.5]" />
-          <span className="font-medium text-body-sm">{totalItems}</span>
+          <ShoppingBag className="stroke-[1.5] size-5" />
+          {totalItems > 0 && (
+            <span className="font-medium text-[10px] bg-red-500 text-white size-4 rounded-full p-1 absolute top-0.5 right-0.5  inline-flex justify-center items-center">
+              {totalItems}
+            </span>
+          )}
         </button>
       </SheetTrigger>
       <SheetContent

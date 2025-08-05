@@ -32,15 +32,15 @@ export default async function Home({
   return (
     <>
       <Hero />
-      <Categories />
-      <About />
       {collections[1] && (
         <ProductRail collection={collections[1]} region={region} />
       )}
-      <ShowcaseProducts />
+      <Categories />
       {collections[0] && (
         <ProductRail collection={collections[0]} region={region} />
       )}
+      <About />
+      <ShowcaseProducts />
       <Testimonials />
       <CTA />
       <TrustSection />

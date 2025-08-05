@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "components/ui/select"
+import { cn } from "@lib/utils"
 
 type CountryOption = {
   country: string
@@ -22,9 +23,16 @@ type CountryOption = {
 type CountrySelectProps = {
   onOpenChange?: (state: boolean) => void
   regions: HttpTypes.StoreRegion[]
+  variant?: "default" | "inline"
+  className?: string
 }
 
-const CountrySelect = ({ onOpenChange, regions }: CountrySelectProps) => {
+const CountrySelect = ({
+  onOpenChange,
+  regions,
+  variant,
+  className,
+}: CountrySelectProps) => {
   const [current, setCurrent] = useState<CountryOption | undefined>(undefined)
 
   const { countryCode } = useParams()
@@ -61,20 +69,32 @@ const CountrySelect = ({ onOpenChange, regions }: CountrySelectProps) => {
   }
 
   return (
-    <div className="flex items-center text-body gap-x-2">
-      <span>Shipping to:</span>
+    <div className={cn("flex items-center text-body-sm gap-x-2", className)}>
+      {variant !== "inline" && <span>Shipping to:</span>}
       <Select value={current?.country} onValueChange={handleChange}>
-        <SelectTrigger className="flex-1 border-t-0 border-b rounded-none shadow-none border-x-0 gap-x-2 focus:ring-offset-0 focus:ring-0">
+        <SelectTrigger
+          className={cn(
+            "flex-1 border-t-0 rounded-none shadow-none border-x-0 gap-x-2 focus:ring-offset-0 focus:ring-0",
+            variant === "inline"
+              ? "text-body-sm border-transparent"
+              : "border-b"
+          )}
+        >
           {current && <SelectValue placeholder={current.label} />}
         </SelectTrigger>
-        <SelectContent className="max-h-[442px] overflow-y-auto">
+        <SelectContent className="max-h-[442px] text-body-sm overflow-y-auto">
           {options.map((o, index) => (
             <SelectItem
               key={index}
               value={o.country}
               className="cursor-pointer"
             >
-              <div className="flex text-body items-center gap-x-2">
+              <div
+                className={cn(
+                  "flex  items-center gap-x-2",
+                  variant === "inline" ? "text-body-sm" : "text-body"
+                )}
+              >
                 <ReactCountryFlag
                   svg
                   style={{

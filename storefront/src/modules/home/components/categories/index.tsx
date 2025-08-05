@@ -1,5 +1,3 @@
-import { getCategoriesList } from "@lib/data/categories"
-import ProductPreview from "@modules/products/components/product-preview"
 import Carousel, {
   SliderContainer,
   Slider,

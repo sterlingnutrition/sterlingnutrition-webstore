@@ -9,12 +9,12 @@ export default async function PreviewPrice({ price }: { price: VariantPrice }) {
   return (
     <>
       {price.price_type === "sale" && (
-        <p className="text-center text-body-sm" data-testid="original-price">
+        <p className="text-center text-body" data-testid="original-price">
           {price.original_price}
         </p>
       )}
       <p
-        className={cn("text-center text-body-sm", {
+        className={cn("text-center text-body", {
           "text-ui-fg-interactive": price.price_type === "sale",
         })}
         data-testid="price"

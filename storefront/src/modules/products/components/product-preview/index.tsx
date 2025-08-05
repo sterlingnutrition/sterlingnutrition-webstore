@@ -32,34 +32,31 @@ export default async function ProductPreview({
 
   return (
     <LocalizedClientLink href={`/products/${product.handle}`} className="group">
-      <div data-testid="product-wrapper">
-        <div className="relative w-full overflow-hidden rounded-3xl aspect-square">
+      <div data-testid="group" className="border-2 rounded-3xl">
+        <div className="flex flex-col p-4">
+          <p className=" font-semibold  text-body" data-testid="product-title">
+            {product.title}
+          </p>
+          <p
+            className="mb-2 font-semibold  text-body-sm text-muted-foreground"
+            data-testid="product-category"
+          >
+            {product.categories?.[0].name || product.collection?.title || ""}
+          </p>
+        </div>
+        <div className="relative w-full overflow-hidden aspect-square">
           <Image
             src={product.thumbnail || "/placeholder.png"}
             alt={product.title}
             fill
             style={{ objectFit: "cover" }}
-            className="object-cover w-full h-auto transition-opacity duration-200 rounded-3xl group-hover:opacity-90"
+            className="object-cover w-full h-auto transition-opacity duration-200 "
           />
         </div>
-        <div className="flex flex-col items-center mt-4">
-          <p
-            className="mb-2 font-semibold text-center text-body-sm"
-            data-testid="product-title"
-          >
-            {product.title}
-          </p>
-          <div className="flex items-center text-foreground/90 gap-x-2">
+        <div className="flex items-center p-4">
+          <div className="font-semibold  text-body">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
-          {variant === "minimal" ? null : (
-            <Button
-              variant="stack"
-              className="mt-4 group-hover:tracking-[0.5em] duration-500"
-            >
-              SHOP
-            </Button>
-          )}
         </div>
       </div>
     </LocalizedClientLink>
