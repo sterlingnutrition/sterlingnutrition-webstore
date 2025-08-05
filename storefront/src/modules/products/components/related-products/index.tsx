@@ -71,7 +71,7 @@ export default async function RelatedProducts({
             products.map((product) => (
               <Slider
                 key={product.id}
-                className="w-1/2 pr-5 2xl:pr-10 md:w-1/3 lg:w-1/4 2xl:w-1/5 embla__slide"
+                className="w-1/2 lg:w-1/3 2xl:w-1/4 pr-2 sm:pr-5 embla__slide"
               >
                 <ProductPreview product={product} region={region} isFeatured />
               </Slider>
