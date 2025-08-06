@@ -46,7 +46,7 @@
   }
 
   .content-container {
-    @apply max-w-[1680px] w-full mx-auto px-6 sm:px-10;
+    @apply max-w-[1680px] w-full mx-auto px-4 sm:px-10;
   }
 
   .content-section {

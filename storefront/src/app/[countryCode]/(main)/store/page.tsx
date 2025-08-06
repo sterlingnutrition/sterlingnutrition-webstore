@@ -66,7 +66,7 @@ export default async function AllProductsPage({
   return (
     <>
       <div
-        className="flex flex-col small:flex-row small:items-start gap-10 small:gap-20 py-6 md:py-10 lg:py-16 content-container"
+        className="flex flex-col small:flex-row small:items-start gap-10 content-section content-container"
         data-testid="all-products-container"
       >
         <RefinementList

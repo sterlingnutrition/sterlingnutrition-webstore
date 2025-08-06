@@ -52,8 +52,8 @@ const Hero = () => {
       >
         <SliderContainer className="gap-4">
           {BANNERS.map((banner, index) => (
-            <Slider key={index} className="w-full px-2 embla__slide">
-              <div className="w-full  md:aspect-video rounded-3xl">
+            <Slider key={index} className="w-full embla__slide">
+              <div className="w-full h-full md:aspect-video rounded-3xl">
                 <BannerCard key={index} {...banner} />
               </div>
             </Slider>
@@ -64,7 +64,7 @@ const Hero = () => {
           {/* <SliderPrevButton className="p-2 rounded-full left-4 bg-white/25 dark:-black/25 dark:border-white backdrop-blur-sm text-primary disabled:opacity-20">
             <ChevronLeft className="size-5 md:size-8 stroke-[1.5]" />
           </SliderPrevButton> */}
-          <SliderDotButton />
+          <SliderDotButton className="" activeclass="bg-white" />
           {/* <SliderNextButton className="p-2 rounded-full top-[50%] bg-white/25 dark:bg-black/25 dark:border-white backdrop-blur-sm text-primary disabled:opacity-20">
             <ChevronRight className="size-5 md:size-8 stroke-[1.5]" />
           </SliderNextButton> */}
