@@ -31,14 +31,14 @@ export default function ProductRail({
         </h1>
       </TextReveal>
       <Carousel options={{ loop: true }} activeSlider>
-        <SliderContainer className="gap-4">
+        <SliderContainer className="gap-2">
           {products &&
             products.map((product) => (
               <Slider
                 key={product.id}
-                className="w-1/2 lg:w-1/3 2xl:w-1/4 pr-2 sm:pr-5 embla__slide"
+                className="w-8/10 sm:w-6/10 md:w-1/2 lg:w-1/3 2xl:w-1/4 pr-2 sm:pr-5 embla__slide"
               >
-                <ProductPreview product={product} region={region} isFeatured />
+                <ProductPreview product={product} region={region} />
               </Slider>
             ))}
         </SliderContainer>
